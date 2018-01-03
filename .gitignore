@@ -25,3 +25,6 @@ yarn-error.log*
 !semantic/src/themes/smproj/
 !semantic/dist/semantic.min.css
 !semantic/dist/themes/smproj/
+
+# Firebase API key
+silver-maple-b0405-firebase-adminsdk-za2wg-6d2e4ec226.json

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import logo from '../logo.svg';
+
 import './App.css';
-import { Button } from 'semantic-ui-react';
 import HeaderMenu from './layout/HeaderMenu';
 import Homepage from './layout/Homepage';
+import ShopLayout from './layout/ShopLayout';
 
 class App extends Component {
   render() {
@@ -14,6 +14,8 @@ class App extends Component {
           <div className="container">
             <HeaderMenu />
             <Route exact path="/" component={Homepage} />
+
+            <Route exact path="/shop" component={ShopLayout} />
           </div>
         </BrowserRouter>
       </div>

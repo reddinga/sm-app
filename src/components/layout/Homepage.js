@@ -11,36 +11,82 @@ import {
   Menu,
   Segment,
   Visibility,
+  Responsive,
+  Card,
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import bouquet_sketch from '../../assets/images/bouquet_sketch.jpg';
+import wreath_sketch from '../../assets/images/wreath_sketch.jpg';
+import arrangement_sketch from '../../assets/images/arrangement_sketch.jpg';
+import background from '../../assets/images/florist_large.jpeg';
 
 const FixedMenu = () => (
   <Menu fixed="top" size="large">
     <Container>
-      <Menu.Item as="a" active>
+      <Menu.Item as={Link} to="/" active>
         Home
       </Menu.Item>
-      <Menu.Item as="a">Shop</Menu.Item>
+      <Menu.Item as={Link} to="/shop">
+        Shop
+      </Menu.Item>
       <Menu.Item as="a">About us</Menu.Item>
-      <Menu.Menu position="right">
-        <Menu.Item className="item">
-          <Button as="a">Log in</Button>
-        </Menu.Item>
-        <Menu.Item>
-          <Button as="a" primary>
-            Sign Up
-          </Button>
-        </Menu.Item>
-      </Menu.Menu>
+      <Menu.Item position="right">
+        <Button as="a">Log in</Button>
+        <Button as="a" style={{ marginLeft: '0.5em' }}>
+          Sign Up
+        </Button>
+      </Menu.Item>
     </Container>
   </Menu>
 );
+var sectionStyle = {
+  width: '100%',
+  height: 'auto',
+  minHeight: '700px',
+  padding: '1em 0em',
+  background: `url(${background}) no-repeat center center fixed`,
+  backgroundSize: 'cover',
+};
+var mobileSectionStyle = {
+  width: '100%',
+  padding: '1em 0em',
+  minHeight: '700px',
+  background: `url(${background})`,
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+};
 
-export default class HomepageLayout extends Component {
+export default class Homepage extends Component {
   state = {};
 
   hideFixedMenu = () => this.setState({ visible: false });
   showFixedMenu = () => this.setState({ visible: true });
-
+  renderCover() {
+    return (
+      <Container text>
+        <Header
+          as="h1"
+          content="Refined. Modern. Handmade."
+          style={{
+            fontSize: '4em',
+            fontWeight: 'normal',
+            marginBottom: 0,
+            marginTop: '3em',
+          }}
+        />
+        <Header
+          as="h2"
+          content="Create your own everlasting florals & botanicals"
+          style={{ fontSize: '1.7em', fontWeight: 'normal' }}
+        />
+        <Button primary size="huge" as={Link} to="/shop">
+          Choose a Style
+          <Icon name="right arrow" />
+        </Button>
+      </Container>
+    );
+  }
   render() {
     const { visible } = this.state;
 
@@ -53,58 +99,33 @@ export default class HomepageLayout extends Component {
           onBottomVisible={this.hideFixedMenu}
           once={false}
         >
-          <Segment
-            inverted
+          <Responsive
+            as={Segment}
+            minWidth={1024}
             textAlign="center"
-            style={{ minHeight: 700, padding: '1em 0em' }}
             vertical
+            style={sectionStyle}
           >
-            <Container text>
-              <Header
-                as="h1"
-                content="Refined. Modern. Handmade."
-                inverted
-                style={{
-                  fontSize: '4em',
-                  fontWeight: 'normal',
-                  marginBottom: 0,
-                  marginTop: '3em',
-                }}
-              />
-              <Header
-                as="h2"
-                content="Create your own everlasting florals & botanicals"
-                inverted
-                style={{ fontSize: '1.7em', fontWeight: 'normal' }}
-              />
-              <Button primary size="huge">
-                Choose a Style
-                <Icon name="right arrow" />
-              </Button>
-            </Container>
-          </Segment>
+            {this.renderCover()}
+          </Responsive>
+          <Responsive
+            as={Segment}
+            maxWidth={1024}
+            textAlign="center"
+            vertical
+            style={mobileSectionStyle}
+          >
+            <div>{this.renderCover()}</div>
+          </Responsive>
         </Visibility>
 
         <Segment style={{ padding: '8em 0em' }} vertical>
           <Grid container stackable verticalAlign="middle">
             <Grid.Row>
-              <Grid.Column width={8}>
+              <Grid.Column textAlign="center">
                 <Header as="h3" style={{ fontSize: '2em' }}>
-                  We Help ...
+                  We Make Beautiful Designs to Brighten Your Home Year-Round
                 </Header>
-                <p style={{ fontSize: '1.33em' }}>...</p>
-                <Header as="h3" style={{ fontSize: '2em' }}>
-                  We Make...
-                </Header>
-                <p style={{ fontSize: '1.33em' }}>...</p>
-              </Grid.Column>
-              <Grid.Column floated="right" width={6}>
-                <Image
-                  bordered
-                  rounded
-                  size="large"
-                  src="/assets/images/wireframe/white-image.png"
-                />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -114,29 +135,70 @@ export default class HomepageLayout extends Component {
             </Grid.Row>
           </Grid>
         </Segment>
+        <Card.Group itemsPerRow={3} stackable>
+          <Card>
+            <Card.Content>
+              <Card.Header>Bouquet</Card.Header>
+            </Card.Content>
+            <Card.Content>
+              <Image
+                centered
+                verticalAlign="middle"
+                src={bouquet_sketch}
+                size="medium"
+              />
+            </Card.Content>
+            <Card.Content extra>
+              <div>
+                <Button basic color="green">
+                  Customize
+                </Button>
+              </div>
+            </Card.Content>
+          </Card>
 
-        <Segment style={{ padding: '0em' }} vertical>
-          <Grid celled="internally" columns="equal" stackable>
-            <Grid.Row textAlign="center">
-              <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-                <Header as="h3" style={{ fontSize: '2em' }}>
-                  "What a Company"
-                </Header>
-                <p style={{ fontSize: '1.33em' }}>
-                  That is what they all say about us
-                </p>
-              </Grid.Column>
-              <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-                <Header as="h3" style={{ fontSize: '2em' }}>
-                  "I shouldn't have gone with their competitor."
-                </Header>
-                <p style={{ fontSize: '1.33em' }}>
-                  <b>Nan</b> Chief Fun Officer Acme Toys
-                </p>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Segment>
+          <Card>
+            <Card.Content>
+              <Card.Header>Wreath</Card.Header>
+            </Card.Content>
+            <Card.Content>
+              <Image
+                centered
+                verticalAlign="middle"
+                src={wreath_sketch}
+                size="large"
+              />
+            </Card.Content>
+            <Card.Content extra>
+              <div>
+                <Button basic color="green">
+                  Customize
+                </Button>
+              </div>
+            </Card.Content>
+          </Card>
+
+          <Card>
+            <Card.Content>
+              <Card.Header>Arrangement</Card.Header>
+            </Card.Content>
+            <Card.Content>
+              <Image
+                centered
+                verticalAlign="middle"
+                src={arrangement_sketch}
+                size="medium"
+              />
+            </Card.Content>
+            <Card.Content extra>
+              <div>
+                <Button basic color="green">
+                  Customize
+                </Button>
+              </div>
+            </Card.Content>
+          </Card>
+        </Card.Group>
 
         <Segment style={{ padding: '8em 0em' }} vertical>
           <Container text>
@@ -154,7 +216,7 @@ export default class HomepageLayout extends Component {
               horizontal
               style={{ margin: '3em 0em', textTransform: 'uppercase' }}
             >
-              <a href="#">Case Studies</a>
+              <a href="#1">Case Studies</a>
             </Divider>
 
             <Header as="h3" style={{ fontSize: '2em' }}>
@@ -191,6 +253,18 @@ export default class HomepageLayout extends Component {
                   <p>
                     Extra space for a call to action inside the footer that
                     could help re-engage users.
+                    <a href="https://www.freepik.com/free-vector/hand-drawn-flowers-and-leaves_1141262.htm">
+                      Flower Designs
+                    </a>
+                    <a href="https://www.freepik.com/free-vector/floral-decoration-and-ornaments_772982.htm">
+                      Floral Designs
+                    </a>
+                    <a href="https://www.freepik.com/free-vector/nature-ornaments-design_902717.htm">
+                      Nature Designs
+                    </a>
+                    <a href="https://www.freepik.com/free-vector/outlined-hand-drawn-wreath_894844.htm">
+                      Wreath Design
+                    </a>
                   </p>
                 </Grid.Column>
               </Grid.Row>
