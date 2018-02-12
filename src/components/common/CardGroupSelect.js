@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Image, Header, Card, Segment, Grid } from 'semantic-ui-react';
+import { Header, Card, Segment, Grid } from 'semantic-ui-react';
 import _ from 'lodash';
-import SegmentGroup from 'semantic-ui-react/dist/commonjs/elements/Segment/SegmentGroup';
 
 class CardGroupSelect extends Component {
   constructor(props) {
@@ -11,12 +10,18 @@ class CardGroupSelect extends Component {
     };
     this.handleOptionClick = this.handleOptionClick.bind(this);
   }
+  componentWillReceiveProps(nextProps) {
+    console.log('cardgroup selected', nextProps.selected);
+    // if (this.nextProps.resetState) {
+    this.setState({ selected: nextProps.selected });
+    //}
+  }
   offColor = 'grey';
   onColor = 'pink';
   handleOptionClick(event, data) {
     if (this.state.selected === null || this.state.selected !== data.id) {
       this.setState({ selected: data.id });
-      console.log('DATA', data);
+
       this.props.handleChoiceChange({ id: data.id, src: data.src });
     } else if (this.state.selected === data.id) {
       // we are unselecting current option
@@ -25,7 +30,6 @@ class CardGroupSelect extends Component {
     }
   }
   getCards(cardOptions) {
-    console.log('card options', cardOptions);
     return _.map(cardOptions, opts => {
       return (
         <Grid.Column
@@ -52,11 +56,13 @@ class CardGroupSelect extends Component {
   }
   render() {
     return (
-      <Grid centered columns={this.props.itemsPerRow}>
-        <Grid.Row centered>{this.getCards(this.props.cardOptions)}</Grid.Row>
-      </Grid>
+      <Segment raised style={{ margin: '1em' }}>
+        <Grid centered columns={this.props.itemsPerRow}>
+          <Grid.Row centered>{this.getCards(this.props.cardOptions)}</Grid.Row>
+        </Grid>
+      </Segment>
     );
   }
 }
-
+CardGroupSelect.defaultProps = { resetState: false };
 export default CardGroupSelect;

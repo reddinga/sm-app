@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { Dropdown, Segment, Container } from 'semantic-ui-react';
+import { Dropdown, Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { Image } from 'semantic-ui-react';
 import FirestoreImage from '../common/FirestoreImage';
-import getImage from '../common/getImage';
 import CardGroupSelect from '../common/CardGroupSelect';
 import { setCustomizations } from '../../actions';
 // options-- type-- load choices-- make selection-- update preview image & store in redux
@@ -16,32 +14,57 @@ class Customize extends Component {
     super(props);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.handleChoiceChange = this.handleChoiceChange.bind(this);
+    this.getChoices = this.getChoices.bind(this);
     this.state = {
-      options: { id: null, choice: null },
+      // current selected choice for the active dropdown option
+      selectedChoice: null,
       option: null, //{ id: null, type: null, x: null, y: null },
     };
   }
+  componentWillUnmount() {
+    console.log('customize unmount');
+    this.props.setDesignComplete(false);
+  }
   handleChoiceChange(data) {
+    console.log('handleChoiceChange data id', data.id);
     const id = data.id;
-    this.setState({ options: { id: this.state.option.id, choice: id } });
+    this.setState({
+      resetState: false,
+      selectedChoice: id,
+    });
     const customizations = this.props.customizations;
-    const choiceSrc = '';
+
+    let complete = true;
     const newOpts = customizations.opts.map(opt => {
-      console.log(opt);
-      console.log(this.state.option.id);
       if (opt.optionId === this.state.option.id) {
         opt.src = data.src;
-        opt.id = id;
+        opt.id = id + '-' + opt.optionId;
+      }
+      if (typeof opt.src === 'undefined' || opt.src === null) {
+        complete = false;
       }
       return opt;
     });
-    console.log('newopts', newOpts);
     customizations.opts = newOpts;
     this.props.onChoiceSelect(customizations);
+    this.props.setDesignComplete(complete);
   }
   handleDropdownChange(event, data) {
+    let sel = null;
+    if (this.props.customizations.opts[data.value]) {
+      sel = this.props.customizations.opts[data.value].id;
+    }
+
+    let re = /(\w*)-/;
+    let found = re.exec(sel);
+    if (found) {
+      sel = found[1];
+    }
+
     this.setState({
       option: this.props.designOptions[data.value],
+      selectedChoice: sel,
+      resetState: true,
     });
   }
   getDropdownOptions(opts) {
@@ -55,6 +78,8 @@ class Customize extends Component {
     // order by type
     // to provide component w/ data: compose(firestoreConnect(['designs']),connect(
     let choices = [];
+    // un-select choice option
+
     if (opt && opt.type && this.props.florals && this.props.greenery) {
       if (opt.type === 'florals') {
         choices = this.props.florals;
@@ -78,40 +103,31 @@ class Customize extends Component {
       return {};
     }
   }
+
   render() {
-    console.log('customize props: ', this.props);
-    console.log('customize state:', this.state);
+    console.log(this.props);
     return (
       <Container>
-        <Segment
-          style={{ padding: '4em 4em 10em 4em' }}
-          textAlign="left"
-          vertical
-        >
-          <h1>Customize</h1>
-          <h3>Select option: </h3>
-
-          <Dropdown
-            placeholder="Option #1"
-            selection
-            onChange={this.handleDropdownChange}
-            options={this.getDropdownOptions(this.props.designOptions)}
-          />
-          <Segment>
-            <CardGroupSelect
-              itemsPerRow={5}
-              cardOptions={this.getChoices(this.state.option)}
-              handleChoiceChange={this.handleChoiceChange}
-              selected={null}
-            />
-          </Segment>
-        </Segment>
+        <h1>Customize</h1>
+        <h3 style={{ marginTop: 0 }}>Select option: </h3>
+        <Dropdown
+          placeholder="Option #1"
+          selection
+          onChange={this.handleDropdownChange}
+          options={this.getDropdownOptions(this.props.designOptions)}
+        />
+        <CardGroupSelect
+          itemsPerRow={5}
+          cardOptions={this.getChoices(this.state.option)}
+          handleChoiceChange={this.handleChoiceChange}
+          selected={this.state.selectedChoice}
+          resetState={this.state.resetState}
+        />
       </Container>
     );
   }
 }
 const mapStateToProps = state => {
-  console.log('customize state', state);
   return {
     florals: state.firestore.ordered.florals,
     greenery: state.firestore.ordered.greenery,
@@ -128,5 +144,5 @@ const mapDispatchToProps = dispatch => {
 };
 export default compose(
   firestoreConnect(['florals', 'greenery']),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
 )(Customize);

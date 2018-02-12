@@ -6,7 +6,6 @@ import {
   Grid,
   Header,
   Icon,
-  Image,
   List,
   Menu,
   Segment,
@@ -15,10 +14,9 @@ import {
   Card,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import bouquet_sketch from '../../assets/images/bouquet_sketch.jpg';
-import wreath_sketch from '../../assets/images/wreath_sketch.jpg';
-import arrangement_sketch from '../../assets/images/arrangement_sketch.jpg';
-import background from '../../assets/images/florist_large.jpeg';
+import FirestoreImage from '../common/FirestoreImage';
+import background from '../../assets/images/background/bring_spring_inside.png';
+import backgroundMobile from '../../assets/images/background/bring_spring_inside_mobile.png';
 
 const FixedMenu = () => (
   <Menu fixed="top" size="large">
@@ -40,21 +38,28 @@ const FixedMenu = () => (
   </Menu>
 );
 var sectionStyle = {
-  width: '100%',
+  width: '90%',
   height: 'auto',
-  minHeight: '700px',
+  minHeight: '400px',
+  position: 'relative',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  marginTop: '1em',
   padding: '1em 0em',
-  background: `url(${background}) no-repeat center center fixed`,
+  background: `url(${background}) no-repeat center center `,
   backgroundSize: 'cover',
 };
 var mobileSectionStyle = {
-  width: '100%',
+  width: '90%',
+  height: 'auto',
+  minHeight: '400px',
+  position: 'relative',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  marginTop: '1em',
   padding: '1em 0em',
-  minHeight: '700px',
-  background: `url(${background})`,
+  background: `url(${backgroundMobile}) no-repeat center center `,
   backgroundSize: 'cover',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'center',
 };
 
 export default class Homepage extends Component {
@@ -67,20 +72,33 @@ export default class Homepage extends Component {
       <Container text>
         <Header
           as="h1"
-          content="Refined. Modern. Handmade."
+          content=""
           style={{
             fontSize: '4em',
-            fontWeight: 'normal',
-            marginBottom: 0,
+            fontWeight: 'bold',
+            fontFamily: 'Abhaya Libre',
+            marginBottom: '0',
             marginTop: '3em',
           }}
         />
-        <Header
+        {/*   <Header
           as="h2"
           content="Create your own everlasting florals & botanicals"
           style={{ fontSize: '1.7em', fontWeight: 'normal' }}
-        />
-        <Button primary size="huge" as={Link} to="/shop">
+        /> */}
+        <Button
+          primary
+          size="large"
+          as={Link}
+          to="/shop"
+          style={{
+            fontSize: '1.5em',
+            fontWeight: 'bold',
+            fontFamily: 'Abhaya Libre',
+            marginBottom: '0',
+            marginTop: '1.5em',
+          }}
+        >
           Choose a Style
           <Icon name="right arrow" />
         </Button>
@@ -104,6 +122,7 @@ export default class Homepage extends Component {
             minWidth={1024}
             textAlign="center"
             vertical
+            raised
             style={sectionStyle}
           >
             {this.renderCover()}
@@ -119,11 +138,11 @@ export default class Homepage extends Component {
           </Responsive>
         </Visibility>
 
-        <Segment style={{ padding: '8em 0em' }} vertical>
+        {/*<Segment style={{ padding: '8em 0em' }} vertical>
           <Grid container stackable verticalAlign="middle">
             <Grid.Row>
               <Grid.Column textAlign="center">
-                <Header as="h3" style={{ fontSize: '2em' }}>
+                <Header as="h2">
                   We Make Beautiful Designs to Brighten Your Home Year-Round
                 </Header>
               </Grid.Column>
@@ -134,72 +153,51 @@ export default class Homepage extends Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
+        </Segment>*/}
+        <Segment>
+          <Card.Group itemsPerRow={2} stackable>
+            {/*             <Card>
+              <Card.Content>
+                <Card.Header>Bouquets</Card.Header>
+              </Card.Content>
+              <Card.Content>
+                <FirestoreImage
+                  src="/images/products/peony-vase.png"
+                  size="large"
+                />
+              </Card.Content>
+   
+            </Card> */}
+
+            <Card>
+              {/*             <Card.Content>
+                <Card.Header>Wreaths</Card.Header>
+              </Card.Content> */}
+              <Card.Content>
+                <FirestoreImage
+                  src="/images/products/peony-flower-wreath-background.png"
+                  size="large"
+                />
+              </Card.Content>
+              {/*      <Card.Content extra>
+                <div>
+                  <Button basic color="green">
+                    Customize
+                  </Button>
+                </div>
+              </Card.Content> */}
+            </Card>
+
+            <Card>
+              <Card.Content>
+                <FirestoreImage
+                  src="/images/products/peony-vase-background.png"
+                  size="large"
+                />
+              </Card.Content>
+            </Card>
+          </Card.Group>
         </Segment>
-        <Card.Group itemsPerRow={3} stackable>
-          <Card>
-            <Card.Content>
-              <Card.Header>Bouquet</Card.Header>
-            </Card.Content>
-            <Card.Content>
-              <Image
-                centered
-                verticalAlign="middle"
-                src={bouquet_sketch}
-                size="medium"
-              />
-            </Card.Content>
-            <Card.Content extra>
-              <div>
-                <Button basic color="green">
-                  Customize
-                </Button>
-              </div>
-            </Card.Content>
-          </Card>
-
-          <Card>
-            <Card.Content>
-              <Card.Header>Wreath</Card.Header>
-            </Card.Content>
-            <Card.Content>
-              <Image
-                centered
-                verticalAlign="middle"
-                src={wreath_sketch}
-                size="large"
-              />
-            </Card.Content>
-            <Card.Content extra>
-              <div>
-                <Button basic color="green">
-                  Customize
-                </Button>
-              </div>
-            </Card.Content>
-          </Card>
-
-          <Card>
-            <Card.Content>
-              <Card.Header>Arrangement</Card.Header>
-            </Card.Content>
-            <Card.Content>
-              <Image
-                centered
-                verticalAlign="middle"
-                src={arrangement_sketch}
-                size="medium"
-              />
-            </Card.Content>
-            <Card.Content extra>
-              <div>
-                <Button basic color="green">
-                  Customize
-                </Button>
-              </div>
-            </Card.Content>
-          </Card>
-        </Card.Group>
-
         <Segment style={{ padding: '8em 0em' }} vertical>
           <Container text>
             <Header as="h3" style={{ fontSize: '2em' }}>

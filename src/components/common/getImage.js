@@ -1,6 +1,6 @@
 import defaultTopGreenery from '../../assets/images/greenery/leaves.png';
-import defaultTopFloral from '../../assets/images/florals/flower-top.png';
-import defaultTopWreath from '../../assets/images/bases/wreaths/wreath.png';
+import defaultTopFloral from '../../assets/images/florals/pink-peony-top.png';
+import defaultTopWreath from '../../assets/images/bases/wreaths/grapevine-wreath.png';
 import defaultArrangement from '../../assets/images/arrangement_sketch.jpg';
 import defaultBouquet from '../../assets/images/bouquet_sketch.jpg';
 

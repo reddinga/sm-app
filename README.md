@@ -1,10 +1,18 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+To update semantic themes:
+cd semantic
+gulp build-css
+gulp build-assets
+cd ..
+rmdir semantic\src\definitions /s
+npm explore semantic-ui gulp install
+npm install semantic-ui-react --save-dev
+
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ## Table of Contents
-
 - [Updating to New Releases](#updating-to-new-releases)
 - [Sending Feedback](#sending-feedback)
 - [Folder Structure](#folder-structure)

@@ -1,3 +1,6 @@
 /*******************************
         Global Overrides
 *******************************/
+.redux-toastr .toastr.rrt-success {
+  background-color: @primaryColor !important;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import ShopWizard from '../shop/ShopWizard';
+import AddToCartToastr from '../shop/AddToCartToastr';
 
 class ShopLayout extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class ShopLayout extends Component {
   render() {
     return (
       <div>
+        <AddToCartToastr />
         <ShopWizard />
       </div>
     );

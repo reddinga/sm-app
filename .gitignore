@@ -28,3 +28,6 @@ yarn-error.log*
 
 # Firebase API key
 silver-maple-b0405-firebase-adminsdk-za2wg-6d2e4ec226.json
+
+# Functions node_modules
+/functions/node_modules

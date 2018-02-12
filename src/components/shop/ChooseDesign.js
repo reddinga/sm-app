@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { Button, Card } from 'semantic-ui-react';
 import { Stage, Layer } from 'react-konva';
-import CanvasImg from '../canvas/CanvasImg';
-import getImage from '../common/getImage';
 import CardGroupSelect from '../common/CardGroupSelect';
-import { Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { setDesignOptions, setCustomizations } from '../../actions';
 import FirestoreImage from '../common/FirestoreImage';
@@ -17,6 +13,7 @@ class ChooseDesign extends Component {
     this.setDesignOptions = this.setDesignOptions.bind(this);
     this.getDesignOptions = this.getDesignOptions.bind(this);
     this.handleChoiceChange = this.handleChoiceChange.bind(this);
+    this.resetDesignOpts = this.resetDesignOpts.bind(this);
   }
   handleChoiceChange(data) {
     if (data && data.id !== null) {
@@ -43,6 +40,8 @@ class ChooseDesign extends Component {
       this.props.setCustomizations({
         id: choice.id,
         src: choice.src,
+        x: choice.x,
+        y: choice.y,
         opts: choiceOpts,
       });
 
@@ -54,16 +53,54 @@ class ChooseDesign extends Component {
       this.props.setDesign(null);
     }
   }
-
+  componentWillReceiveProps(nextProps) {
+    console.log('choose design props');
+  }
+  componentWillMount(nextProps) {
+    console.log('choose design mount');
+    console.log(this.props);
+    if (this.props.design) {
+      this.resetDesignOpts();
+    }
+  }
+  componentWillUpdate(nextProps) {
+    console.log('choose design update');
+  }
+  resetDesignOpts() {
+    console.log('resetDesignOpts');
+    const choice = this.props.designs.find(baseProps => {
+      if (baseProps.id === this.props.design) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    this.props.onSetDesignOptions(choice.opts);
+    const choiceOpts = choice.opts.map(opts => {
+      let ret = {
+        optionId: opts.id,
+        x: opts.x,
+        y: opts.y,
+        src: null,
+        id: null,
+        type: opts.type,
+      };
+      return ret;
+    });
+    this.props.setCustomizations({
+      id: choice.id,
+      src: choice.src,
+      x: choice.x,
+      y: choice.y,
+      opts: choiceOpts,
+    });
+  }
   getOptions() {
     if (this.props.designs) {
       const options = this.props.designs;
       return options
         .filter(baseProps => {
-          console.log('baseProps:', baseProps.styleId);
-          console.log('style', this.props.getStyle());
           if (baseProps.styleId === this.props.getStyle()) {
-            console.log('add option');
             return true;
           } else {
             return false;
@@ -74,7 +111,12 @@ class ChooseDesign extends Component {
             id: baseProps.id,
             header: baseProps.name,
             content: (
-              <Stage key={`stage-${baseProps.id}`} width={140} height={140}>
+              <Stage
+                scale={{ x: 0.75, y: 0.75 }}
+                key={`stage-${baseProps.id}`}
+                width={240}
+                height={225}
+              >
                 <Layer key={`layer-${baseProps.id}`}>
                   <FirestoreImage
                     key={baseProps.id}
@@ -83,7 +125,11 @@ class ChooseDesign extends Component {
                   />
                   {baseProps.opts.map(props => {
                     return (
-                      <FirestoreImage key={props.id} {...props} canvas={true} />
+                      <FirestoreImage
+                        key={props.id + '-' + props.name}
+                        {...props}
+                        canvas={true}
+                      />
                     );
                   })}
                 </Layer>
@@ -104,7 +150,7 @@ class ChooseDesign extends Component {
   getDesignOptions() {}
   render() {
     return (
-      <Container>
+      <div>
         <h1>Select a Design</h1>
         <CardGroupSelect
           itemsPerRow={2}
@@ -112,14 +158,13 @@ class ChooseDesign extends Component {
           handleChoiceChange={this.handleChoiceChange}
           selected={this.props.getDesign()}
         />
-      </Container>
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state, props) => {
-  console.log('chooseDesign state: ', state);
-  return { designs: state.firestore.ordered.designs };
+  return { ...state, designs: state.firestore.ordered.designs };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -134,5 +179,5 @@ const mapDispatchToProps = dispatch => {
 };
 export default compose(
   firestoreConnect(['designs']),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
 )(ChooseDesign);

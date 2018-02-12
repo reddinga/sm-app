@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {
-  withFirestore,
-  isLoaded,
-  isEmpty,
-  firestoreConnect,
-} from 'react-redux-firebase';
-import getImage from '../common/getImage';
+import { firestoreConnect } from 'react-redux-firebase';
 import CardGroupSelect from '../common/CardGroupSelect';
 import { Container } from 'semantic-ui-react';
-import { Image } from 'semantic-ui-react';
 import FirestoreImage from '../common/FirestoreImage';
 
 class ChooseStyle extends Component {
@@ -36,8 +29,6 @@ class ChooseStyle extends Component {
     }
   }
   render() {
-    console.log('styleprops', this.props.styles);
-
     return (
       <Container>
         <h1>Select a Style</h1>
@@ -53,10 +44,9 @@ class ChooseStyle extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  console.log('chooseStyle state: ', state);
   return { styles: state.firestore.ordered.styles };
 };
 
 export default compose(firestoreConnect(['styles']), connect(mapStateToProps))(
-  ChooseStyle
+  ChooseStyle,
 );

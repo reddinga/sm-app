@@ -1,17 +1,13 @@
 import { combineReducers } from 'redux';
-import { firebaseStateReducer } from 'react-redux-firebase';
+import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer } from 'redux-firestore';
-import {
-  SET_STYLE,
-  SET_DESIGN,
-  SET_DESIGN_OPTIONS,
-  SET_CUSTOMIZATIONS,
-} from '../actions';
+import { reducer as toastrReducer } from 'react-redux-toastr';
+import * as types from '../actions/types';
 
 function style(state = null, action) {
   console.log('action: ', action);
   switch (action.type) {
-    case SET_STYLE:
+    case types.SET_STYLE:
       return action.id;
     default:
       return state;
@@ -19,7 +15,7 @@ function style(state = null, action) {
 }
 function design(state = null, action) {
   switch (action.type) {
-    case SET_DESIGN:
+    case types.SET_DESIGN:
       return action.id;
     default:
       return state;
@@ -27,7 +23,7 @@ function design(state = null, action) {
 }
 function designOptions(state = null, action) {
   switch (action.type) {
-    case SET_DESIGN_OPTIONS:
+    case types.SET_DESIGN_OPTIONS:
       return action.opts;
     default:
       return state;
@@ -36,20 +32,57 @@ function designOptions(state = null, action) {
 function customizations(state = null, action) {
   console.log(action);
   switch (action.type) {
-    case SET_CUSTOMIZATIONS:
+    case types.SET_CUSTOMIZATIONS:
       return action.customizations;
     default:
       return state;
   }
 }
+function designComplete(state = false, action) {
+  console.log(action);
+  switch (action.type) {
+    case types.SET_DESIGN_COMPLETE:
+      return action.complete;
+    default:
+      return state;
+  }
+}
+
+function cartItems(state = [], action) {
+  switch (action.type) {
+    case 'ADD_TO_CART':
+      return [
+        ...state,
+        {
+          cartItem: action.item,
+          quantity: 1,
+        },
+      ];
+    case 'UPDATE_CART_ITEM_QUANTITY':
+      return state.map((cartItem, index) => {
+        if (index === action.index) {
+          return Object.assign({}, cartItem, {
+            quantity: action.quantity,
+          });
+        }
+        return cartItem;
+      });
+    default:
+      return state;
+  }
+}
+
 // Add Firebase to reducers
 const reducers = combineReducers({
   style,
+  designComplete,
   design,
   designOptions,
-  customizations,
-  firebase: firebaseStateReducer,
+  customizations, // `googleUser` from the onsuccess Google Sign In callback
+  firebase: firebaseReducer,
   firestore: firestoreReducer,
+  cartItems,
+  toastr: toastrReducer,
 });
 
 export default reducers;

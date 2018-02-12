@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 import { Segment, Grid } from 'semantic-ui-react';
 import _ from 'lodash';
-import StepGroup from './StepGroup';
+import { Redirect } from 'react-router-dom';
+
+import StepGroup from '../common/StepGroup';
 import ChooseStyle from './ChooseStyle';
 import ChooseDesign from './ChooseDesign';
 import Preview from './Preview';
 import Customize from './Customize';
 import { connect } from 'react-redux';
-import { setStyle, setDesign, setDesignOptions } from '../../actions';
+import {
+  addToCart,
+  setStyle,
+  setDesign,
+  setDesignOptions,
+  setCustomizations,
+  setDesignComplete,
+} from '../../actions';
+import AddToCartToastr from './AddToCartToastr';
 
 class ShopWizard extends Component {
   constructor(props) {
@@ -19,11 +29,15 @@ class ShopWizard extends Component {
     this.setDesign = this.setDesign.bind(this);
     this.getDesign = this.getDesign.bind(this);
     this.nextStep = this.nextStep.bind(this);
+    this.setDesignComplete = this.setDesignComplete.bind(this);
+    this.addDesignToCart = this.addDesignToCart.bind(this);
+    this.goToCart = this.goToCart.bind(this);
 
     this.state = {
+      redirect: false,
       activeKey: 0,
       style: this.props.style,
-      style: this.props.design,
+      design: this.props.design,
       steps: [
         {
           title: 'Select Style',
@@ -63,11 +77,18 @@ class ShopWizard extends Component {
           disabled: true,
           key: 2,
           description: '',
-          content: <Customize />,
+          content: <Customize setDesignComplete={this.setDesignComplete} />,
         },
       ],
     };
   }
+  componentWillUnmount() {
+    this.props.onStyleSelect(null);
+    this.props.onDesignSelect(null);
+    this.props.setCustomizations(null);
+    this.props.onSetDesignComplete(false);
+  }
+
   // called when active step changes
   // either from next button or selecting from step menu
   onStepChange(key) {
@@ -142,6 +163,12 @@ class ShopWizard extends Component {
     this.setState({ style: id });
     this.props.onStyleSelect(id);
     this.toggleCompleted(id);
+    // when setting style to new options or null,
+    // set any previous design choices to null
+    this.props.setCustomizations(null);
+    this.props.onSetDesignOptions(null);
+    this.setState({ design: null });
+    this.props.onDesignSelect(null);
   }
   // get style choide
   getStyle() {
@@ -157,37 +184,71 @@ class ShopWizard extends Component {
   getDesign() {
     return this.state.design;
   }
+  setDesignComplete(complete) {
+    this.props.onSetDesignComplete(complete);
+  }
+  addDesignToCart() {
+    const cartItem = {
+      design: this.state.design,
+      customizations: this.props.customizations,
+      title: 'test',
+      price: 3.0,
+    };
+    console.log('addToCart', cartItem);
+    this.props.onAddToCart(cartItem);
+    this.props.onSetDesignComplete(false);
+    this.goToCart();
+  }
+  goToCart() {
+    this.setState({ redirect: true });
+  }
 
   render() {
-    console.log('wizardState', this.state);
     return (
       <div>
-        <Segment attached="top">
-          <Grid
-            verticalAlign="top"
-            style={{ padding: '0em 0em' }}
-            attached="top"
-          >
-            <Grid.Row>
-              <Grid.Column textAlign="center">
+        {this.state.redirect ? (
+          <Redirect push to="/cart" />
+        ) : (
+          <div>
+            <Segment attached="top">
+              <Grid
+                centered
+                columns={2}
+                verticalAlign="top"
+                style={{ padding: '1em 1em' }}
+                attached="top"
+              >
                 <Preview />
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Segment>
-        <Segment size="mini" style={{ padding: '0em 0em' }} vertical attached>
-          <StepGroup onClick={this.onStepChange} steps={this.state.steps} />
-        </Segment>
-        <Segment style={{ padding: '0em 0em' }} vertical attached="bottom">
-          {this.getStepContent()}
-        </Segment>
+              </Grid>
+            </Segment>
+            <Segment
+              size="mini"
+              style={{ padding: '0em 0em' }}
+              vertical
+              attached
+            >
+              <StepGroup onClick={this.onStepChange} steps={this.state.steps} />
+            </Segment>
+            <Segment
+              style={{ paddingBottom: '6em' }}
+              vertical
+              attached="bottom"
+            >
+              {this.getStepContent()}
+            </Segment>{' '}
+          </div>
+        )}
+
+        <AddToCartToastr
+          show={this.props.designComplete}
+          onClick={this.addDesignToCart}
+        />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log('wizard state', state);
   return { ...state };
 };
 
@@ -201,6 +262,15 @@ const mapDispatchToProps = dispatch => {
     },
     onSetDesignOptions: opts => {
       dispatch(setDesignOptions(opts));
+    },
+    onAddToCart: id => {
+      dispatch(addToCart(id));
+    },
+    setCustomizations: base => {
+      dispatch(setCustomizations(base));
+    },
+    onSetDesignComplete: complete => {
+      dispatch(setDesignComplete(complete));
     },
   };
 };

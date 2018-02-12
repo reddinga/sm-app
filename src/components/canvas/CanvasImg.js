@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
-import { Stage, Layer, Image } from 'react-konva';
+
+import { Image } from 'react-konva';
 /* debug iphone - connect to usb, start ios debugger:
  C:\Users\aredding.IS\AppData\Roaming\npm\node_modules\remotedebug-ios-webkit-adapter\node_modules
  \vs-libimobile\ios-webkit-debug-proxy-1.8-win64-bin\ios_webkit_debug_proxy.exe

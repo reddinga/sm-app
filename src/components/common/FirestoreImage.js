@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
 import { Image } from 'semantic-ui-react';
 import { Image as CanvasImage } from 'react-konva';
 
@@ -12,6 +9,7 @@ class FirestoreImage extends Component {
     this.state = { src: null, image: new window.Image() };
     this.getImage = this.getImage.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.setImageOffset = this.setImageOffset.bind(this);
   }
   componentWillMount() {
     if (!this.props.canvas) {
@@ -20,15 +18,27 @@ class FirestoreImage extends Component {
   }
   async componentDidMount() {
     if (this.props.canvas) {
-      const retVal = await this.getImage();
+      await this.getImage();
       this.state.image.src = this.state.src;
-      this.state.image.onload = () => {
+      this.state.image.onload = async () => {
         // calling set state here will do nothing
         // because properties of Konva.Image are not changed
         // so we need to update layer manually
+        await this.setImageOffset();
         this.imageNode.getLayer().batchDraw();
       };
     }
+  }
+  setImageOffset() {
+    //baseWidth, baseHeight) {
+    this.imageNode.offsetX(this.imageNode.width() / 2);
+    this.imageNode.offsetY(this.imageNode.height() / 2);
+    // when we are setting {x,y} properties we are setting position of top left corner of image.
+    // but after applying offset when we are setting {x,y}
+    // properties we are setting position of central point of image.
+    // so we also need to move the image to see previous result
+    this.imageNode.x(this.imageNode.x() + this.props.x);
+    this.imageNode.y(this.imageNode.y() + this.props.y);
   }
   getImage() {
     const _this = this;
@@ -57,12 +67,10 @@ class FirestoreImage extends Component {
     });
   }
   render() {
-    console.log(this.props);
     if (this.props.canvas) {
       return (
         <CanvasImage
           image={this.state.image}
-          {...this.props}
           ref={node => {
             this.imageNode = node;
           }}
@@ -71,14 +79,15 @@ class FirestoreImage extends Component {
     } else {
       return (
         <Image
+          style={{ background: 'transparent' }}
           centered
-          verticalAlign="middle"
-          size="small"
+          verticalAlign={this.props.verticalAlign}
+          size={this.props.size}
           src={this.state.src}
         />
       );
     }
   }
 }
-
+FirestoreImage.defaultProps = { size: 'small', verticalAlign: 'middle' };
 export default firebaseConnect()(FirestoreImage);
