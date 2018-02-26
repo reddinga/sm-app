@@ -18,7 +18,9 @@ class Customize extends Component {
     this.state = {
       // current selected choice for the active dropdown option
       selectedChoice: null,
-      option: null, //{ id: null, type: null, x: null, y: null },
+      option: this.props.designOptions[0], //{ id: null, type: null, x: null, y: null },
+
+      resetState: true,
     };
   }
   componentWillUnmount() {
@@ -32,10 +34,10 @@ class Customize extends Component {
       resetState: false,
       selectedChoice: id,
     });
-    const customizations = this.props.customizations;
+    const customDesign = this.props.customDesign;
 
     let complete = true;
-    const newOpts = customizations.opts.map(opt => {
+    const newOpts = customDesign.opts.map(opt => {
       if (opt.optionId === this.state.option.id) {
         opt.src = data.src;
         opt.id = id + '-' + opt.optionId;
@@ -45,14 +47,14 @@ class Customize extends Component {
       }
       return opt;
     });
-    customizations.opts = newOpts;
-    this.props.onChoiceSelect(customizations);
+    customDesign.opts = newOpts;
+    this.props.onChoiceSelect(customDesign);
     this.props.setDesignComplete(complete);
   }
   handleDropdownChange(event, data) {
     let sel = null;
-    if (this.props.customizations.opts[data.value]) {
-      sel = this.props.customizations.opts[data.value].id;
+    if (this.props.customDesign.opts[data.value]) {
+      sel = this.props.customDesign.opts[data.value].id;
     }
 
     let re = /(\w*)-/;
@@ -60,7 +62,7 @@ class Customize extends Component {
     if (found) {
       sel = found[1];
     }
-
+    console.log('sel', sel);
     this.setState({
       option: this.props.designOptions[data.value],
       selectedChoice: sel,
@@ -118,6 +120,8 @@ class Customize extends Component {
         />
         <CardGroupSelect
           itemsPerRow={5}
+          doubling={false}
+          stackable={false}
           cardOptions={this.getChoices(this.state.option)}
           handleChoiceChange={this.handleChoiceChange}
           selected={this.state.selectedChoice}

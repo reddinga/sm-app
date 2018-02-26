@@ -39,6 +39,8 @@ class ChooseDesign extends Component {
       });
       this.props.setCustomizations({
         id: choice.id,
+        name: choice.name,
+        price: choice.price,
         src: choice.src,
         x: choice.x,
         y: choice.y,
@@ -89,6 +91,8 @@ class ChooseDesign extends Component {
     });
     this.props.setCustomizations({
       id: choice.id,
+      name: choice.name,
+      price: choice.price,
       src: choice.src,
       x: choice.x,
       y: choice.y,
@@ -110,6 +114,7 @@ class ChooseDesign extends Component {
           let ret = {
             id: baseProps.id,
             header: baseProps.name,
+            footer: '$' + baseProps.price,
             content: (
               <Stage
                 scale={{ x: 0.75, y: 0.75 }}

@@ -4,3 +4,6 @@
 .redux-toastr .toastr.rrt-success {
   background-color: @primaryColor !important;
 }
+.ui.form select {
+  font-family: @pageFont !important;
+}

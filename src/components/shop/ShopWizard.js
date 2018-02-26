@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Segment, Grid } from 'semantic-ui-react';
 import _ from 'lodash';
 import { Redirect } from 'react-router-dom';
-
+import { toastr } from 'react-redux-toastr';
 import StepGroup from '../common/StepGroup';
 import ChooseStyle from './ChooseStyle';
 import ChooseDesign from './ChooseDesign';
@@ -83,9 +83,11 @@ class ShopWizard extends Component {
     };
   }
   componentWillUnmount() {
+    toastr.remove('addToCartToastr');
     this.props.onStyleSelect(null);
     this.props.onDesignSelect(null);
     this.props.setCustomizations(null);
+    this.props.onSetDesignOptions(null);
     this.props.onSetDesignComplete(false);
   }
 
@@ -142,6 +144,7 @@ class ShopWizard extends Component {
       return step;
     });
     this.setState({ steps: newSteps });
+    this.nextStep();
   }
   // set this step as uncompleted
   setUnCompleted() {
@@ -190,9 +193,9 @@ class ShopWizard extends Component {
   addDesignToCart() {
     const cartItem = {
       design: this.state.design,
-      customizations: this.props.customizations,
-      title: 'test',
-      price: 3.0,
+      customDesign: this.props.customDesign,
+      title: this.props.customDesign.name,
+      price: this.props.customDesign.price,
     };
     console.log('addToCart', cartItem);
     this.props.onAddToCart(cartItem);
@@ -235,7 +238,7 @@ class ShopWizard extends Component {
               attached="bottom"
             >
               {this.getStepContent()}
-            </Segment>{' '}
+            </Segment>
           </div>
         )}
 

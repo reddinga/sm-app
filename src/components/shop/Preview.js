@@ -6,7 +6,7 @@ import FirestoreImage from '../common/FirestoreImage';
 
 class Preview extends Component {
   getPreview() {
-    const preview = this.props.customizations;
+    const preview = this.props.customDesign;
     console.log(preview);
     if (preview) {
       return (

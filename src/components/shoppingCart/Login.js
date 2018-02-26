@@ -23,6 +23,7 @@ class Login extends Component {
     console.log('render auth', auth);
     console.log('render profile', profile);
     console.log(isLoaded(auth));
+    console.log(isEmpty(auth));
     return (
       <div>
         {/*       <button // <GoogleButton/> button can be used instead
@@ -30,7 +31,7 @@ class Login extends Component {
         >
           Login With Google
         </button> */}
-        <Segment>
+        <Segment basic>
           {isLoaded(auth) && !isEmpty(auth) ? (
             <div style={{ margin: '1em' }}>
               <h3>Continue as </h3>

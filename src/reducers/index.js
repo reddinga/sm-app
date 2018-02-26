@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer } from 'redux-firestore';
 import { reducer as toastrReducer } from 'react-redux-toastr';
+import { reducer as formReducer } from 'redux-form';
 import * as types from '../actions/types';
 
 function style(state = null, action) {
@@ -29,7 +30,7 @@ function designOptions(state = null, action) {
       return state;
   }
 }
-function customizations(state = null, action) {
+function customDesign(state = null, action) {
   console.log(action);
   switch (action.type) {
     case types.SET_CUSTOMIZATIONS:
@@ -78,11 +79,12 @@ const reducers = combineReducers({
   designComplete,
   design,
   designOptions,
-  customizations, // `googleUser` from the onsuccess Google Sign In callback
+  customDesign, // `googleUser` from the onsuccess Google Sign In callback
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   cartItems,
   toastr: toastrReducer,
+  form: formReducer,
 });
 
 export default reducers;

@@ -18,6 +18,8 @@ import FirestoreImage from '../common/FirestoreImage';
 import background from '../../assets/images/background/bring_spring_inside.png';
 import backgroundMobile from '../../assets/images/background/bring_spring_inside_mobile.png';
 
+const dividerSrc = '../../assets/images/decorative/divider_simple.png';
+
 const FixedMenu = () => (
   <Menu fixed="top" size="large">
     <Container>
@@ -67,25 +69,9 @@ export default class Homepage extends Component {
 
   hideFixedMenu = () => this.setState({ visible: false });
   showFixedMenu = () => this.setState({ visible: true });
-  renderCover() {
+  renderCover(mobile) {
     return (
       <Container text>
-        <Header
-          as="h1"
-          content=""
-          style={{
-            fontSize: '4em',
-            fontWeight: 'bold',
-            fontFamily: 'Abhaya Libre',
-            marginBottom: '0',
-            marginTop: '3em',
-          }}
-        />
-        {/*   <Header
-          as="h2"
-          content="Create your own everlasting florals & botanicals"
-          style={{ fontSize: '1.7em', fontWeight: 'normal' }}
-        /> */}
         <Button
           primary
           size="large"
@@ -96,7 +82,7 @@ export default class Homepage extends Component {
             fontWeight: 'bold',
             fontFamily: 'Abhaya Libre',
             marginBottom: '0',
-            marginTop: '1.5em',
+            marginTop: mobile ? '11em' : '11em',
           }}
         >
           Choose a Style
@@ -125,7 +111,7 @@ export default class Homepage extends Component {
             raised
             style={sectionStyle}
           >
-            {this.renderCover()}
+            {this.renderCover(false)}
           </Responsive>
           <Responsive
             as={Segment}
@@ -134,139 +120,149 @@ export default class Homepage extends Component {
             vertical
             style={mobileSectionStyle}
           >
-            <div>{this.renderCover()}</div>
+            <div>{this.renderCover(true)}</div>
           </Responsive>
         </Visibility>
 
-        {/*<Segment style={{ padding: '8em 0em' }} vertical>
-          <Grid container stackable verticalAlign="middle">
+        <Segment>
+          <Grid doubling container stackable verticalAlign="middle">
             <Grid.Row>
               <Grid.Column textAlign="center">
-                <Header as="h2">
-                  We Make Beautiful Designs to Brighten Your Home Year-Round
-                </Header>
+                <Header as="h1">Handmade Custom Designs</Header>
+                <FirestoreImage
+                  src="/images/web-details/divider_simple.png"
+                  size={null}
+                />
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row>
+
+            <Grid.Row columns={3}>
               <Grid.Column textAlign="center">
-                <Button size="huge">Check Them Out</Button>
+                <FirestoreImage
+                  src="/images/products/tulip-arrangement.png"
+                  size="medium"
+                />
+                <p style={{ fontSize: '2em' }}>arrangements</p>
+              </Grid.Column>
+              <Grid.Column textAlign="center">
+                <FirestoreImage
+                  src="/images/products/peony-flower-wreath_300.png"
+                  size="medium"
+                />
+                <p style={{ fontSize: '2em' }}>wreaths</p>
+              </Grid.Column>
+              <Grid.Column textAlign="center">
+                <FirestoreImage
+                  src="/images/products/white-peony-bouquet.png"
+                  size="medium"
+                />
+                <p style={{ fontSize: '2em' }}>bouquets</p>
               </Grid.Column>
             </Grid.Row>
           </Grid>
-        </Segment>*/}
-        <Segment>
-          <Card.Group itemsPerRow={2} stackable>
-            {/*             <Card>
-              <Card.Content>
-                <Card.Header>Bouquets</Card.Header>
-              </Card.Content>
-              <Card.Content>
-                <FirestoreImage
-                  src="/images/products/peony-vase.png"
-                  size="large"
-                />
-              </Card.Content>
-   
-            </Card> */}
-
-            <Card>
-              {/*             <Card.Content>
-                <Card.Header>Wreaths</Card.Header>
-              </Card.Content> */}
-              <Card.Content>
-                <FirestoreImage
-                  src="/images/products/peony-flower-wreath-background.png"
-                  size="large"
-                />
-              </Card.Content>
-              {/*      <Card.Content extra>
-                <div>
-                  <Button basic color="green">
-                    Customize
-                  </Button>
-                </div>
-              </Card.Content> */}
-            </Card>
-
-            <Card>
-              <Card.Content>
-                <FirestoreImage
-                  src="/images/products/peony-vase-background.png"
-                  size="large"
-                />
-              </Card.Content>
-            </Card>
-          </Card.Group>
         </Segment>
-        <Segment style={{ padding: '8em 0em' }} vertical>
+        <Segment vertical>
           <Container text>
-            <Header as="h3" style={{ fontSize: '2em' }}>
-              Breaking The Grid, Grabs Your Attention
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>...</p>
-            <Button as="a" size="large">
-              Read More
-            </Button>
+            <Grid relaxed="very">
+              <Grid.Row>
+                <Grid.Column textAlign="center">
+                  <Header as="h3" style={{ fontSize: '2em' }}>
+                    Florals for All Occasions
+                  </Header>
+                  <FirestoreImage
+                    src="/images/web-details/divider_simple.png"
+                    size={null}
+                  />
+                </Grid.Column>
+              </Grid.Row>
 
-            <Divider
-              as="h4"
-              className="header"
-              horizontal
-              style={{ margin: '3em 0em', textTransform: 'uppercase' }}
-            >
-              <a href="#1">Case Studies</a>
-            </Divider>
-
-            <Header as="h3" style={{ fontSize: '2em' }}>
-              Did We Tell You About ...?
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>...</p>
-            <Button as="a" size="large">
-              I'm Still Quite Interested
-            </Button>
+              <Grid.Row style={{ paddingBottom: '0em' }}>
+                <Grid.Column textAlign="center">
+                  <p style={{ fontSize: '1.33em' }}>
+                    All designs are customized with the flowers and colors of
+                    your choice. <br /> Our products are ideal for:
+                  </p>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row style={{ paddingTop: '1em', paddingBottom: '1em' }}>
+                <Grid.Column textAlign="left">
+                  <List>
+                    <List.Item>
+                      <List.Header>Home decor</List.Header>
+                      Perfectly coordinated with your style
+                    </List.Item>
+                    <List.Item>
+                      <List.Header>Custom gifts</List.Header>
+                      With your recipient's favorite colors and flowers
+                    </List.Item>
+                    <List.Item>
+                      <List.Header>Wedding florals</List.Header>
+                      Arrangements and bouquets to match your color scheme
+                    </List.Item>
+                    <List.Item>
+                      <List.Header>Holiday decorations</List.Header>
+                      Designs that are elegant yet fun
+                    </List.Item>
+                  </List>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Grid.Column textAlign="center">
+                  <Button primary as={Link} to="/shop">
+                    Start customizing
+                    <Icon name="right arrow" />
+                  </Button>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
           </Container>
+        </Segment>
+        {/*  <Divider horizontal style={{ padding: '1em 0em' }}>
+          <Icon disabled name="wizard" size="mini" />
+        </Divider> */}
+        <Segment attached="bottom" style={{ paddingTop: '1.8em' }}>
+          <Grid relaxed="very">
+            <Grid.Row>
+              <Grid.Column textAlign="center">
+                <Header as="h3" style={{ fontSize: '2em' }}>
+                  Quality and Styles that Last
+                </Header>
+                <FirestoreImage
+                  src="/images/web-details/divider_simple.png"
+                  size={null}
+                />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column textAlign="center">
+                <p style={{ fontSize: '1.33em' }}>
+                  We use the highest quality faux florals in all of our
+                  products. <br /> Our "real touch" flowers look and feel more
+                  like real flowers than any silk flower.
+                  <br /> <br />
+                  Our designs are classic and timeless&mdash; <br />
+                  <em>you</em> make them unique.
+                </p>
+                <Button primary as={Link} to="/shop">
+                  Shop
+                </Button>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Segment>
 
         <Segment inverted vertical style={{ padding: '5em 0em' }}>
           <Container>
             <Grid divided inverted stackable>
               <Grid.Row>
-                <Grid.Column width={3}>
-                  <Header inverted as="h4" content="About" />
+                <Grid.Column textAlign="center">
                   <List link inverted>
-                    <List.Item as="a">Sitemap</List.Item>
                     <List.Item as="a">Contact Us</List.Item>
                   </List>
                 </Grid.Column>
-                <Grid.Column width={3}>
-                  <Header inverted as="h4" content="Services" />
-                  <List link inverted>
-                    <List.Item as="a">FAQ</List.Item>
-                  </List>
-                </Grid.Column>
-                <Grid.Column width={7}>
-                  <Header as="h4" inverted>
-                    Footer Header
-                  </Header>
-                  <p>
-                    Extra space for a call to action inside the footer that
-                    could help re-engage users.
-                    <a href="https://www.freepik.com/free-vector/hand-drawn-flowers-and-leaves_1141262.htm">
-                      Flower Designs
-                    </a>
-                    <a href="https://www.freepik.com/free-vector/floral-decoration-and-ornaments_772982.htm">
-                      Floral Designs
-                    </a>
-                    <a href="https://www.freepik.com/free-vector/nature-ornaments-design_902717.htm">
-                      Nature Designs
-                    </a>
-                    <a href="https://www.freepik.com/free-vector/outlined-hand-drawn-wreath_894844.htm">
-                      Wreath Design
-                    </a>
-                  </p>
-                </Grid.Column>
               </Grid.Row>
             </Grid>
+            <small>&copy; Copyright 2018, Silver Maple Studio</small>
           </Container>
         </Segment>
       </div>

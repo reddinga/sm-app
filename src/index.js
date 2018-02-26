@@ -40,7 +40,7 @@ function logger({ getState }) {
 // ------------------ react-redux-firestore ------------------
 const devConfig = require('./firebaseConfig.json');
 // TODO: add production app and configuration to separate the dbs
-const prodConfig = ''; //require('./firebaseConfigProduction.json');
+const prodConfig = require('./firebaseConfig.json'); //require('./firebaseConfigProduction.json');
 const firebaseConfig =
   process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
 

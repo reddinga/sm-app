@@ -28,7 +28,7 @@ const Cart = ({ cartItems, onCheckoutClicked }) => {
   console.log('cartItems cart', cartItems);
   return (
     <div style={{ marginTop: '1em' }}>
-      <Header as="h1">Shopping Bag</Header>
+      <Header as="h2">Shopping Bag</Header>
       <div>{nodes}</div>
       {total > 0 && <p style={{ fontSize: '1.5em' }}>Total: &#36;{total}</p>}
       <Button

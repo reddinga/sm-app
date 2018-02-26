@@ -21,7 +21,9 @@
 .App-intro {
   font-size: large;
 }
-
+.bottomMargin {
+  margin-bottom: 1em !important;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -29,4 +31,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+.lightBackground {
+  background-color: #bab2b5 !important;
+}
+.darkWhiteBackground {
+  background-color: #f3f4f5 !important;
 }

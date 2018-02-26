@@ -3,20 +3,16 @@ import { injectStripe, CardElement } from 'react-stripe-elements';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
-import { Button } from 'semantic-ui-react';
+import { Button, Segment } from 'semantic-ui-react';
 import * as actions from '../../actions';
 import CardList from './CardList';
-
 class Payments extends Component {
   constructor(props) {
     super(props);
-    this.listen = this.listen.bind(this);
     this.state = {
       sources: {},
       stripeCustomerInitialized: false,
     };
-
-    this.listen();
   }
 
   handleSubmit = ev => {
@@ -47,7 +43,7 @@ class Payments extends Component {
         console.log('err saving card', err);
       });
   };
-  listen = () => {
+  /*   listen = () => {
     console.log('listen', this);
     // used to check if we have this customer in DB, if so, show the forms
     this.props.firebase
@@ -62,35 +58,13 @@ class Payments extends Component {
           this.setState({ stripeCustomerInitialized: false });
         },
       );
-    // show saved 'sources'/cards
-    this.props.firebase
-      .database()
-      .ref(`/stripe_customers/${this.props.auth.uid}/sources`)
-      .on(
-        'value',
-        snapshot => {
-          this.setState({ sources: snapshot.val() });
-        },
-        () => {
-          this.setState({});
-        },
-      );
-  };
-
-  submitNewCharge = () => {
-    this.props.firebase
-      .database()
-      .ref(`/stripe_customers/${this.props.auth.uid}/charges`)
-      .push({
-        source: '', //this.newCharge.source,
-        amount: 1, //parseInt(this.newCharge.amount),
-      });
-  };
+  }; */
 
   render() {
     console.log('props', this.props);
 
     console.log('state', this.state);
+
     /*
     // Create an instance of the card Element
     var card = elements.create('card', {style: style});
@@ -108,25 +82,46 @@ class Payments extends Component {
       }
     }); */
     return (
-      <div>
-        <h2>Payments</h2>
-        <h2>Saved Cards</h2>
-        <CardList sources={this.state.sources} />
-        <h2>Add New Card</h2>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Card details
+      <Segment textAlign="center" basic>
+        <h2>Billing</h2>
+
+        <Segment textAlign="left">
+          <CardList
+            sources={this.props.sources}
+            onSelectCard={this.props.setSelectedSource}
+          />
+        </Segment>
+        <Segment textAlign="left">
+          <h2>New Card</h2>
+          <form onSubmit={this.handleSubmit}>
             <CardElement style={{ base: { fontSize: '18px' } }} />
-          </label>
-          <Button>Add card</Button>
-        </form>
-      </div>
+
+            <Button style={{ marginTop: '1em' }} compact>
+              Add card
+            </Button>
+          </form>
+        </Segment>
+      </Segment>
     );
   }
 }
+
+const mapStateToProps = (state, props) => {
+  console.log('ms state', state);
+  let data = state.firebase.data.stripe_customers
+    ? state.firebase.data.stripe_customers[state.firebase.auth.uid].sources
+    : {};
+  console.log('data', data);
+  return {
+    ...state,
+    auth: state.firebase.auth,
+    profile: state.firebase.profile,
+    sources: data,
+  };
+};
 export default injectStripe(
   compose(
-    firebaseConnect(), // withFirebase can also be used
-    connect(({ firebase: { auth, profile } }) => ({ auth, profile }), actions),
+    firebaseConnect(['stripe_customers']), // withFirebase can also be used
+    connect(mapStateToProps, actions),
   )(Payments),
 );

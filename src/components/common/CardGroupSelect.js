@@ -46,9 +46,23 @@ class CardGroupSelect extends Component {
             }
             onClick={this.handleOptionClick}
           >
-            {opts.header && <Header>{opts.header}</Header>}
-
             {opts.content}
+            {(opts.header || opts.footer) && (
+              <Card.Content
+                extra
+                textAlign="center"
+                className="darkWhiteBackground"
+              >
+                {opts.header && (
+                  <Card.Header textAlign="center">{opts.header}</Card.Header>
+                )}
+                {opts.footer && (
+                  <Header as="h3" style={{ marginTop: '0.25em' }}>
+                    {opts.footer}
+                  </Header>
+                )}
+              </Card.Content>
+            )}
           </Card>
         </Grid.Column>
       );
@@ -57,12 +71,21 @@ class CardGroupSelect extends Component {
   render() {
     return (
       <Segment raised style={{ margin: '1em' }}>
-        <Grid centered columns={this.props.itemsPerRow}>
+        <Grid
+          centered
+          columns={this.props.itemsPerRow}
+          doubling={this.props.doubling}
+          stackable={this.props.stackable}
+        >
           <Grid.Row centered>{this.getCards(this.props.cardOptions)}</Grid.Row>
         </Grid>
       </Segment>
     );
   }
 }
-CardGroupSelect.defaultProps = { resetState: false };
+CardGroupSelect.defaultProps = {
+  resetState: false,
+  doubling: true,
+  stackable: true,
+};
 export default CardGroupSelect;
