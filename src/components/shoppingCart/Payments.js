@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { Button, Segment } from 'semantic-ui-react';
 import * as actions from '../../actions';
-import CardList from './CardList';
+import CardDropdown from './CardDropdown';
 class Payments extends Component {
   constructor(props) {
     super(props);
@@ -86,17 +86,17 @@ class Payments extends Component {
         <h2>Billing</h2>
 
         <Segment textAlign="left">
-          <CardList
+          <CardDropdown
             sources={this.props.sources}
             onSelectCard={this.props.setSelectedSource}
           />
         </Segment>
         <Segment textAlign="left">
-          <h2>New Card</h2>
+          <h4>New Card</h4>
           <form onSubmit={this.handleSubmit}>
             <CardElement style={{ base: { fontSize: '18px' } }} />
 
-            <Button style={{ marginTop: '1em' }} compact>
+            <Button primary style={{ marginTop: '1em' }} compact>
               Add card
             </Button>
           </form>

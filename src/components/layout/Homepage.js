@@ -80,7 +80,6 @@ export default class Homepage extends Component {
           style={{
             fontSize: '1.5em',
             fontWeight: 'bold',
-            fontFamily: 'Abhaya Libre',
             marginBottom: '0',
             marginTop: mobile ? '11em' : '11em',
           }}
@@ -125,62 +124,59 @@ export default class Homepage extends Component {
         </Visibility>
 
         <Segment>
-          <Grid doubling container stackable verticalAlign="middle">
-            <Grid.Row>
-              <Grid.Column textAlign="center">
-                <Header as="h1">Handmade Custom Designs</Header>
-                <FirestoreImage
-                  src="/images/web-details/divider_simple.png"
-                  size={null}
-                />
-              </Grid.Column>
-            </Grid.Row>
-
-            <Grid.Row columns={3}>
-              <Grid.Column textAlign="center">
-                <FirestoreImage
-                  src="/images/products/tulip-arrangement.png"
-                  size="medium"
-                />
-                <p style={{ fontSize: '2em' }}>arrangements</p>
-              </Grid.Column>
-              <Grid.Column textAlign="center">
-                <FirestoreImage
-                  src="/images/products/peony-flower-wreath_300.png"
-                  size="medium"
-                />
-                <p style={{ fontSize: '2em' }}>wreaths</p>
-              </Grid.Column>
-              <Grid.Column textAlign="center">
-                <FirestoreImage
-                  src="/images/products/white-peony-bouquet.png"
-                  size="medium"
-                />
-                <p style={{ fontSize: '2em' }}>bouquets</p>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
+          <Container text>
+            <Grid
+              doubling
+              container
+              stackable
+              verticalAlign="middle"
+              relaxed="very"
+            >
+              <Grid.Row>
+                <Grid.Column textAlign="center">
+                  <Header as="h1">Handmade Custom Designs</Header>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row columns={3}>
+                <Grid.Column textAlign="center">
+                  <FirestoreImage
+                    src="/images/products/peony-vase_300.png"
+                    size="medium"
+                  />
+                  <p>ARRANGEMENTS</p>
+                </Grid.Column>
+                <Grid.Column textAlign="center">
+                  <FirestoreImage
+                    src="/images/products/peony-flower-wreath_300.png"
+                    size="medium"
+                  />
+                  <p>WREATHS</p>
+                </Grid.Column>
+                <Grid.Column textAlign="center">
+                  <FirestoreImage
+                    src="/images/products/white-peony-bouquet.png"
+                    size="medium"
+                  />
+                  <p>BOUQUETS</p>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Container>
         </Segment>
-        <Segment vertical>
+        <Segment>
           <Container text>
             <Grid relaxed="very">
               <Grid.Row>
                 <Grid.Column textAlign="center">
-                  <Header as="h3" style={{ fontSize: '2em' }}>
-                    Florals for All Occasions
-                  </Header>
-                  <FirestoreImage
-                    src="/images/web-details/divider_simple.png"
-                    size={null}
-                  />
+                  <Header as="h1">Florals for All Occasions</Header>
                 </Grid.Column>
               </Grid.Row>
 
               <Grid.Row style={{ paddingBottom: '0em' }}>
                 <Grid.Column textAlign="center">
-                  <p style={{ fontSize: '1.33em' }}>
+                  <p>
                     All designs are customized with the flowers and colors of
-                    your choice. <br /> Our products are ideal for:
+                    your choice. <br />Our products are ideal for:
                   </p>
                 </Grid.Column>
               </Grid.Row>
@@ -188,28 +184,52 @@ export default class Homepage extends Component {
                 <Grid.Column textAlign="left">
                   <List>
                     <List.Item>
-                      <List.Header>Home decor</List.Header>
-                      Perfectly coordinated with your style
+                      <List.Content>
+                        <strong>HOME DECOR</strong>
+                        <List.Description>
+                          Perfectly coordinated with your style
+                        </List.Description>
+                      </List.Content>
                     </List.Item>
                     <List.Item>
-                      <List.Header>Custom gifts</List.Header>
-                      With your recipient's favorite colors and flowers
+                      <List.Content>
+                        <strong>CUSTOM GIFTS</strong>
+                        <List.Description>
+                          With your recipient's favorite colors and flowers
+                        </List.Description>
+                      </List.Content>
                     </List.Item>
                     <List.Item>
-                      <List.Header>Wedding florals</List.Header>
-                      Arrangements and bouquets to match your color scheme
+                      <List.Content>
+                        <strong>WEDDING FLORALS</strong>
+                        <List.Description>
+                          Arrangements and bouquets to match your color scheme
+                        </List.Description>
+                      </List.Content>
                     </List.Item>
                     <List.Item>
-                      <List.Header>Holiday decorations</List.Header>
-                      Designs that are elegant yet fun
+                      <List.Content>
+                        <strong>HOLIDAY DECOR</strong>
+                        <List.Description>
+                          Festive decorations that are elegant yet fun
+                        </List.Description>
+                      </List.Content>
                     </List.Item>
                   </List>
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row>
                 <Grid.Column textAlign="center">
-                  <Button primary as={Link} to="/shop">
-                    Start customizing
+                  <Button
+                    secondary
+                    size="medium"
+                    as={Link}
+                    to="/shop"
+                    style={{
+                      fontSize: '1.25em',
+                    }}
+                  >
+                    Start Customizing
                     <Icon name="right arrow" />
                   </Button>
                 </Grid.Column>
@@ -220,35 +240,42 @@ export default class Homepage extends Component {
         {/*  <Divider horizontal style={{ padding: '1em 0em' }}>
           <Icon disabled name="wizard" size="mini" />
         </Divider> */}
-        <Segment attached="bottom" style={{ paddingTop: '1.8em' }}>
-          <Grid relaxed="very">
-            <Grid.Row>
-              <Grid.Column textAlign="center">
-                <Header as="h3" style={{ fontSize: '2em' }}>
-                  Quality and Styles that Last
-                </Header>
-                <FirestoreImage
-                  src="/images/web-details/divider_simple.png"
-                  size={null}
-                />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column textAlign="center">
-                <p style={{ fontSize: '1.33em' }}>
-                  We use the highest quality faux florals in all of our
-                  products. <br /> Our "real touch" flowers look and feel more
-                  like real flowers than any silk flower.
-                  <br /> <br />
-                  Our designs are classic and timeless&mdash; <br />
-                  <em>you</em> make them unique.
-                </p>
-                <Button primary as={Link} to="/shop">
-                  Shop
-                </Button>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
+        <Segment style={{ paddingTop: '1.8em' }}>
+          <Container text>
+            <Grid relaxed="very">
+              <Grid.Row>
+                <Grid.Column textAlign="center">
+                  <Header as="h1">Quality and Styles that Last</Header>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Grid.Column textAlign="center">
+                  <p>
+                    We always use the highest quality faux florals in our
+                    products. <br />"Real Touch" faux flowers look and feel just
+                    like natural flowers.
+                    <br />
+                    <br />
+                    We start with designs that are classic and timeless&mdash;{' '}
+                    <br />
+                    <em>you</em> make them unique.
+                  </p>
+
+                  <Button
+                    primary
+                    size="medium"
+                    as={Link}
+                    to="/shop"
+                    style={{
+                      fontSize: '1.25em',
+                    }}
+                  >
+                    Shop
+                  </Button>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Container>
         </Segment>
 
         <Segment inverted vertical style={{ padding: '5em 0em' }}>

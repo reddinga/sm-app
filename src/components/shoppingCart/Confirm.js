@@ -119,6 +119,7 @@ class Payments extends Component {
         </Segment>
         <Segment textAlign="left">
           <Button
+            primary
             style={{ marginTop: '1em' }}
             compact
             onClick={this.submitNewCharge}

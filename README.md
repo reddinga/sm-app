@@ -5,7 +5,7 @@ cd semantic
 gulp build-css
 gulp build-assets
 cd ..
-rmdir semantic\src\definitions /s
+rmdir semantic\src\definitions /s /q
 npm explore semantic-ui gulp install
 npm install semantic-ui-react --save-dev
 

@@ -135,7 +135,7 @@
 
 /* Title */
 .ui.steps .step .title {
-  font-family: 'Montserrat', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 1.14285714em;
   font-weight: bold;
 }
@@ -361,7 +361,7 @@
   background: #F3F4F5;
 }
 .ui.steps .step.active .title {
-  color: #FBBBB9;
+  color: #faa0bf;
 }
 .ui.ordered.steps .step.active:before,
 .ui.steps .active.step .icon {
@@ -395,7 +395,7 @@
 /* Completed */
 .ui.steps .step.completed > .icon:before,
 .ui.ordered.steps .step.completed:before {
-  color: #21BA45;
+  color: #c56f90;
 }
 
 /* Disabled */

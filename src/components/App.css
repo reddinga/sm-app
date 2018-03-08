@@ -32,9 +32,8 @@
     transform: rotate(360deg);
   }
 }
-.lightBackground {
-  background-color: #bab2b5 !important;
-}
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 .darkWhiteBackground {
   background-color: #f3f4f5 !important;
 }

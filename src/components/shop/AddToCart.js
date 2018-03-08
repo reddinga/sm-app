@@ -4,7 +4,7 @@ class AddToCart extends Component {
   render() {
     return (
       <div>
-        <Button onClick={this.props.onClick} basic inverted size="huge" fluid>
+        <Button onClick={this.props.onClick} inverted basic size="huge" fluid>
           Add to cart
         </Button>
       </div>

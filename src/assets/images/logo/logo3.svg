@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="347.2095mm"
+   height="100.88811mm"
+   viewBox="0 0 347.20952 100.88811"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="logo3.svg"
+   inkscape:export-filename="C:\Users\aredding.IS\Documents\smproj\src\assets\images\logo\logo_leaf.png"
+   inkscape:export-xdpi="131.8"
+   inkscape:export-ydpi="131.8">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient4519"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop4517" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="623.08879"
+     inkscape:cy="398.17025"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:window-width="1280"
+     inkscape:window-height="657"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     fit-margin-left="1"
+     fit-margin-top="1"
+     fit-margin-bottom="1"
+     fit-margin-right="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-65.022678,204.09663)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#faa0bf;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="63.740646"
+       y="-138.68489"
+       id="text12"><tspan
+         sodipodi:role="line"
+         id="tspan10"
+         x="63.740646"
+         y="-138.68489"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.79999924px;font-family:'Abhaya Libre SemiBold';-inkscape-font-specification:'Abhaya Libre SemiBold, ';fill:#faa0bf;fill-opacity:1;stroke-width:0.26458332">silver</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:11.01324654px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#8090a0;fill-opacity:1;stroke:none;stroke-width:0.27533117"
+       x="190.95224"
+       y="-110.85466"
+       id="text16"
+       transform="scale(1.0406218,0.96096392)"><tspan
+         sodipodi:role="line"
+         id="tspan14"
+         x="190.95224"
+         y="-110.85466"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.39999962px;font-family:'Alex Brush';-inkscape-font-specification:'Alex Brush';fill:#8090a0;fill-opacity:1;stroke-width:0.27533117">Studio</tspan></text>
+    <path
+       style="fill:#8090a0;fill-opacity:1;stroke:#8090a0;stroke-width:1.53438056;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 103.97243,-112.635 84.38679,-0.72129"
+       id="path4523"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#8090a0;fill-opacity:1;stroke:#8090a0;stroke-width:1.53438044;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 274.82162,-113.39095 84.38679,-0.72129"
+       id="path4523-2"
+       inkscape:connector-curvature="0" />
+    <g
+       transform="matrix(0.18123663,0,0,-0.18861898,167.74876,-196.30635)"
+       id="g4568">
+      <g
+         id="g4566">
+        <g
+           id="g4564">
+          <path
+             inkscape:connector-curvature="0"
+             style="fill:#8090a0;fill-opacity:1;stroke-width:5.80913401;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+             d="m 558.10926,-201.989 c 0,7.817 -32.939,5.689 -35.556,11.378 -2.617,5.689 36.5,52.156 30.811,62.578 -5.689,10.433 -57.867,-13.266 -61.156,-8.055 -3.277,5.211 3.322,39.822 -2.367,44.089 -5.689,4.267 -59.733,-55.933 -67.322,-48.833 -7.578,7.111 17.545,119.467 12.356,121.731 -5.188,2.253 -38.901,-15.542 -43.156,-14.586 -4.254,0.942 -30.65,69.687 -38.41,69.687 -7.76,0 -34.156,-68.745 -38.411,-69.689 -4.255,-0.956 -37.968,16.839 -43.156,14.586 -5.188,-2.264 19.934,-114.62 12.356,-121.731 -7.589,-7.099 -61.633,53.101 -67.322,48.834 -5.689,-4.267 0.91,-38.878 -2.367,-44.089 -3.288,-5.211 -55.467,18.489 -61.156,8.055 -5.689,-10.422 33.428,-56.889 30.811,-62.578 -2.616,-5.688 -35.555,-3.56 -35.555,-11.377 0,-7.817 96.006,-59.563 102.4,-65.661 6.394,-6.087 -33.155,-31.869 -27.5,-36.739 6.554,-5.643 43.691,9.444 118.522,10.889 v -68.722 c 0,-6.292 5.097,-11.378 11.378,-11.378 6.292,0 11.378,5.086 11.378,11.378 v 68.722 c 74.832,-1.445 111.969,-16.532 118.522,-10.889 5.643,4.87 -33.906,30.652 -27.5,36.739 6.394,6.098 102.4,57.844 102.4,65.661"
+             id="path4562" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="g4570"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4572"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4574"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4576"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4578"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4580"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4582"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4584"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4586"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4588"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4590"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4592"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4594"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4596"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <g
+       id="g4598"
+       transform="matrix(0.1449893,0,0,0.15089518,196.11647,-205.12817)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#faa0bf;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="282.64468"
+       y="-138.68489"
+       id="text12-2"><tspan
+         sodipodi:role="line"
+         id="tspan10-3"
+         x="282.64468"
+         y="-138.68489"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.79999924px;font-family:'Abhaya Libre SemiBold';-inkscape-font-specification:'Abhaya Libre SemiBold, ';fill:#faa0bf;fill-opacity:1;stroke-width:0.26458332">maple</tspan></text>
+  </g>
+</svg>

@@ -22,6 +22,8 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "1.0.17",
+    "react-scroll-to-component": "^1.0.2",
+    "react-share": "^2.0.0",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^1.4.1",
     "redux": "^3.7.2",
@@ -39,7 +41,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "add_data": "babel-node src/helpers/addDataToFirebase.js --presets es2015,stage-2"
+    "add_data": "babel-node src/helpers/addDataToFirebase.js --presets es2015,stage-2",
+    "update_semantic": "updateSemantic.bat"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

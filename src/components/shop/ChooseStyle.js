@@ -31,7 +31,6 @@ class ChooseStyle extends Component {
   render() {
     return (
       <Container>
-        <h1>Select a Style</h1>
         <CardGroupSelect
           itemsPerRow={3}
           cardOptions={this.getStyleOptions()}

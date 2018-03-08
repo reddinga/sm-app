@@ -60,7 +60,9 @@ function cartItems(state = [], action) {
         },
       ];
     case 'UPDATE_CART_ITEM_QUANTITY':
-      return state.map((cartItem, index) => {
+      console.log('update qty reducer', action);
+      console.log('state', state);
+      let test = state.map((cartItem, index) => {
         if (index === action.index) {
           return Object.assign({}, cartItem, {
             quantity: action.quantity,
@@ -68,6 +70,8 @@ function cartItems(state = [], action) {
         }
         return cartItem;
       });
+      console.log('test', test);
+      return test;
     default:
       return state;
   }

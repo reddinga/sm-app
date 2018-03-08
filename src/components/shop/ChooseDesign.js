@@ -4,6 +4,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { Stage, Layer } from 'react-konva';
 import CardGroupSelect from '../common/CardGroupSelect';
 import { connect } from 'react-redux';
+import { Container } from 'semantic-ui-react';
 import { setDesignOptions, setCustomizations } from '../../actions';
 import FirestoreImage from '../common/FirestoreImage';
 
@@ -114,7 +115,10 @@ class ChooseDesign extends Component {
           let ret = {
             id: baseProps.id,
             header: baseProps.name,
-            footer: '$' + baseProps.price,
+            footer: new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            }).format(baseProps.price),
             content: (
               <Stage
                 scale={{ x: 0.75, y: 0.75 }}
@@ -155,15 +159,14 @@ class ChooseDesign extends Component {
   getDesignOptions() {}
   render() {
     return (
-      <div>
-        <h1>Select a Design</h1>
+      <Container>
         <CardGroupSelect
           itemsPerRow={2}
           cardOptions={this.getOptions()}
           handleChoiceChange={this.handleChoiceChange}
           selected={this.props.getDesign()}
         />
-      </div>
+      </Container>
     );
   }
 }

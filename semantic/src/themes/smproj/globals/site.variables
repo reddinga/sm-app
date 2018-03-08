@@ -9,8 +9,8 @@
 @fontName          : 'Abhaya Libre';
 @fontSmoothing     : antialiased;
 
-@headerFont        : 'Montserrat', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-@pageFont          : @fontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@headerFont        : 'Raleway', sans-serif;
+@pageFont          : @fontName, serif;
 
 @googleFontName    : @fontName;
 @importGoogleFonts : true;
@@ -47,11 +47,11 @@
     Brand Colors
 --------------------*/
 
-@primaryColor        : #AC3B61;
-@secondaryColor      : #123C69;
+@primaryColor        : #faa0bf;
+@secondaryColor      : #8090a0;
 
-@lightPrimaryColor   : #EDC7b7;
-@lightSecondaryColor : #BAB2B5;
+@lightPrimaryColor   : #ffd2f2;
+@lightSecondaryColor : #b0c0d1;
 
 /*--------------
   Page Heading
@@ -117,7 +117,7 @@
         Page
 --------------------*/
 
-@pageBackground      : #EEE2DC;
+@pageBackground      : lighten(@lightSecondaryColor, 15);
 @pageOverflowX       : hidden;
 
 @lineHeight          : 1.4285em;
@@ -134,7 +134,7 @@
        Links
 --------------------*/
 
-@linkColor           : #FBBBB9;
+@linkColor           : @primaryColor;
 @linkUnderline       : none;
 @linkHoverColor      : darken(saturate(@linkColor, 20), 15, relative);
 @linkHoverUnderline  : @linkUnderline;
@@ -342,11 +342,11 @@
 --------------------*/
 
 /* Positive */
-@positiveColor           : @green;
-@positiveBackgroundColor : #FCFFF5;
-@positiveBorderColor     : #A3C293;
-@positiveHeaderColor     : #1A531B;
-@positiveTextColor       : #2C662D;
+@positiveColor           : #c56f90;
+@positiveBackgroundColor : lighten(@positiveColor, 15);
+@positiveBorderColor     : lighten(@positiveColor, 5);
+@positiveHeaderColor     : saturate(darken(@positiveColor, 5), 15, relative);
+@positiveTextColor       : darken(@positiveColor, 5);
 
 /* Negative */
 @negativeColor           : @red;

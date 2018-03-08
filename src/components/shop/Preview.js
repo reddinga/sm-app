@@ -3,37 +3,23 @@ import { Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Stage, Layer } from 'react-konva';
 import FirestoreImage from '../common/FirestoreImage';
+import PreviewCanvas from './PreviewCanvas';
 
 class Preview extends Component {
   getPreview() {
     const preview = this.props.customDesign;
     console.log(preview);
     if (preview) {
-      return (
-        <Stage key={`preview-stage-${preview.id}`} width={350} height={350}>
-          <Layer key={`preview-layer-${preview.id}`}>
-            <FirestoreImage
-              key={`preview-base-key-${preview.id}`}
-              {...preview}
-              canvas={true}
-            />
-            {preview.opts.map(choices => {
-              if (choices.id && choices.src) {
-                return (
-                  <FirestoreImage key={choices.id} {...choices} canvas={true} />
-                );
-              } else {
-                return null;
-              }
-            })}
-          </Layer>
-        </Stage>
-      );
+      return <PreviewCanvas preview={preview} />;
     } else {
       return (
-        <Stage width={350} height={350}>
-          <Layer />
-        </Stage>
+        <div>
+          <Stage width={350} height={295}>
+            <Layer />
+          </Stage>
+
+          <h2>Preview Your Design Here</h2>
+        </div>
       );
     }
   }

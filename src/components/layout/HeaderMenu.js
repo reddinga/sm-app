@@ -9,7 +9,7 @@ import {
   Message,
 } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
-import logo from '../../assets/images/logo/logo.png';
+import logo from '../../assets/images/logo/logo_leaf.png';
 import header1 from '../../assets/images/logo/header1.png';
 import header2 from '../../assets/images/logo/header2.png';
 
@@ -77,7 +77,6 @@ class HeaderMenu extends Component {
           <Menu
             style={{
               margin: '0em 0em',
-              borderBottom: '2px solid rgb(179, 146, 157)',
             }}
             pointing
             secondary

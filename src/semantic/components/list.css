@@ -159,7 +159,7 @@ ol.ui.list ol li,
 .ui.list > .item .header {
   display: block;
   margin: 0em;
-  font-family: 'Montserrat', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.87);
 }
@@ -181,11 +181,11 @@ ol.ui.list ol li,
 .ui.list .list > a.item,
 .ui.list > a.item {
   cursor: pointer;
-  color: #FBBBB9;
+  color: #faa0bf;
 }
 .ui.list .list > a.item:hover,
 .ui.list > a.item:hover {
-  color: #ff7874;
+  color: #ff5e95;
 }
 
 /* Linked Item Icons */
@@ -198,11 +198,11 @@ ol.ui.list ol li,
 .ui.list .list > .item a.header,
 .ui.list > .item a.header {
   cursor: pointer;
-  color: #FBBBB9 !important;
+  color: #faa0bf !important;
 }
 .ui.list .list > .item a.header:hover,
 .ui.list > .item a.header:hover {
-  color: #ff7874 !important;
+  color: #ff5e95 !important;
 }
 
 /* Floated Content */
@@ -366,7 +366,7 @@ ol.ui.list ol li,
 }
 .ui.inverted.list .list > a.item:hover,
 .ui.inverted.list > a.item:hover {
-  color: #ff7874;
+  color: #ff5e95;
 }
 
 /* Linking Content */
@@ -374,7 +374,7 @@ ol.ui.list ol li,
   color: rgba(255, 255, 255, 0.9) !important;
 }
 .ui.inverted.list .item a:not(.ui):hover {
-  color: #ff7874 !important;
+  color: #ff5e95 !important;
 }
 
 /*-------------------

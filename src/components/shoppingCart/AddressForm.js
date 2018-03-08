@@ -151,7 +151,7 @@ class AddressForm extends Component {
             />
           </div>
 
-          <Button disabled={pristine || submitting} type="submit">
+          <Button primary disabled={pristine || submitting} type="submit">
             Add address
           </Button>
         </Form>

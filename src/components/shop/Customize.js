@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { Dropdown, Container } from 'semantic-ui-react';
+import { Dropdown, Container, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import FirestoreImage from '../common/FirestoreImage';
 import CardGroupSelect from '../common/CardGroupSelect';
 import { setCustomizations } from '../../actions';
+import AddToCart from './AddToCart';
 // options-- type-- load choices-- make selection-- update preview image & store in redux
 // all choices--> add to cart
 
@@ -109,25 +110,34 @@ class Customize extends Component {
   render() {
     console.log(this.props);
     return (
-      <Container>
-        <h1>Customize</h1>
-        <h3 style={{ marginTop: 0 }}>Select option: </h3>
-        <Dropdown
-          placeholder="Option #1"
-          selection
-          onChange={this.handleDropdownChange}
-          options={this.getDropdownOptions(this.props.designOptions)}
-        />
-        <CardGroupSelect
-          itemsPerRow={5}
-          doubling={false}
-          stackable={false}
-          cardOptions={this.getChoices(this.state.option)}
-          handleChoiceChange={this.handleChoiceChange}
-          selected={this.state.selectedChoice}
-          resetState={this.state.resetState}
-        />
-      </Container>
+      <Segment raised style={{ margin: '1em' }}>
+        <Container>
+          <h3 style={{ marginTop: 0 }}>Select option: </h3>
+          <Dropdown
+            placeholder="Option #1"
+            selection
+            fluid
+            onChange={this.handleDropdownChange}
+            defaultValue={0}
+            options={this.getDropdownOptions(this.props.designOptions)}
+          />
+          <CardGroupSelect
+            itemsPerRow={5}
+            doubling={false}
+            stackable={false}
+            cardOptions={this.getChoices(this.state.option)}
+            handleChoiceChange={this.handleChoiceChange}
+            selected={this.state.selectedChoice}
+            resetState={this.state.resetState}
+          />
+
+          {/*           <AddToCart
+            onClick={() => {
+              //Add to cart always visible on page but disabled when not needed?
+            }}
+          /> */}
+        </Container>
+      </Segment>
     );
   }
 }

@@ -3,7 +3,7 @@ import { Segment, Select } from 'semantic-ui-react';
 
 // [{ key: 'af', value: 'af', flag: 'af', text: 'Afghanistan' }, ...{}]
 
-class CardList extends Component {
+class CardDropdown extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -67,7 +67,7 @@ class CardList extends Component {
     if (this.state.cards && this.state.cards.length > 0) {
       return (
         <div>
-          <h2>Saved Cards</h2>
+          <h4>Saved Cards</h4>
           <Select
             placeholder="Select card"
             options={this.state.cards}
@@ -78,7 +78,7 @@ class CardList extends Component {
     } else {
       return (
         <div>
-          <h2>Saved Cards</h2>
+          <h4>Saved Cards</h4>
           <p>No saved cards</p>
         </div>
       );
@@ -86,4 +86,4 @@ class CardList extends Component {
   }
 }
 
-export default CardList;
+export default CardDropdown;

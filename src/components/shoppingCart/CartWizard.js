@@ -6,25 +6,40 @@ import _ from 'lodash';
 
 import StepGroup from '../common/StepGroup';
 import StepWrapper from '../common/StepWrapper';
-import { checkout } from '../../actions';
+import { checkout, updateQuantity } from '../../actions';
 import Cart from './Cart';
 import Login from './Login';
 import Shipping from './Shipping';
 import Payments from './Payments';
 import Confirm from './Confirm';
+import BackButton from '../common/BackButton';
+import NextButton from '../common/NextButton';
+import StepControlButtons from '../common/StepControlButtons';
 
 class CartWizard extends Component {
   constructor(props) {
     super(props);
     this.onStepChange = this.onStepChange.bind(this);
     this.nextStep = this.nextStep.bind(this);
+    this.backStep = this.backStep.bind(this);
+    this.getCartItems = this.getCartItems.bind(this);
+    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
     this.setDimmer = this.setDimmer.bind(this);
+    this.setProfile = this.setProfile.bind(this);
+    this.getSelectedAddressValue = this.getSelectedAddressValue.bind(this);
+    this.setSelectedAddressValue = this.setSelectedAddressValue.bind(this);
+    this.setSelectedAddress = this.setSelectedAddress.bind(this);
+    this.getSelectedAddress = this.getSelectedAddress.bind(this);
     this.setSelectedSource = this.setSelectedSource.bind(this);
     this.getSelectedSource = this.getSelectedSource.bind(this);
+    this.getStepControlButtons = this.getStepControlButtons.bind(this);
     this.state = {
       dimmed: false,
       activeKey: 0,
       selectedSource: null,
+      selectedAddress: null,
+      selectedAddressValue: null,
+      cartItems: this.props.cartItems ? this.props.cartItems : null,
     };
     this.state.steps = [
       {
@@ -37,8 +52,9 @@ class CartWizard extends Component {
         description: 'Review your items',
         content: (
           <Cart
-            cartItems={this.props.cartItems}
+            getCartItems={this.getCartItems}
             total={this.props.total}
+            onChangeQuantity={this.props.onChangeQuantity}
             onCheckoutClicked={() => {}}
           />
         ),
@@ -48,33 +64,49 @@ class CartWizard extends Component {
         icon: 'user circle outline',
         active: false,
         completed: false,
-        disabled: false,
+        disabled: false, // for now with testing with empty cart
         key: 1,
         description: 'Login to your account',
-        content: <Login />,
+        content: (
+          <div>
+            <Login setProfile={this.setProfile} />
+          </div>
+        ),
       },
       {
         title: 'Shipping',
         icon: 'truck',
         active: false,
         completed: false,
-        disabled: false,
+        disabled: true,
         key: 2,
         description: '',
-        content: <Shipping />,
+        content: (
+          <div>
+            <Shipping
+              setSelectedAddress={this.setSelectedAddress}
+              getSelectedAddress={this.getSelectedAddress}
+              getSelectedAddressValue={this.getSelectedAddressValue}
+              setSelectedAddressValue={this.setSelectedAddressValue}
+              setDimmer={this.setDimmer}
+            />
+          </div>
+        ),
       },
       {
         title: 'Billing',
         icon: 'payment',
         active: false,
         completed: false,
-        disabled: false,
+        disabled: true,
         key: 3,
         description: 'Enter billing information',
         content: (
-          <Elements>
-            <Payments setSelectedSource={this.setSelectedSource} />
-          </Elements>
+          <div>
+            <Elements>
+              <Payments setSelectedSource={this.setSelectedSource} />
+            </Elements>
+          </div>
         ),
       },
       {
@@ -82,19 +114,51 @@ class CartWizard extends Component {
         icon: 'info',
         active: false,
         completed: false,
-        disabled: false,
+        disabled: true,
         key: 4,
         description: 'Review and place your order',
         content: (
-          <Confirm
-            getSelectedSource={this.getSelectedSource}
-            setDimmer={this.setDimmer}
-          />
+          <div>
+            <Confirm
+              getSelectedSource={this.getSelectedSource}
+              setDimmer={this.setDimmer}
+            />
+            <BackButton onClick={this.backStep} />
+          </div>
         ),
       },
     ];
   }
-
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps cart wizard', nextProps);
+    if (nextProps !== this.props) {
+      console.log('nextProps SET STATE');
+      this.setState({ cartItems: nextProps.cartItems }, () => {
+        console.log('state', this.state.cartItems);
+      });
+    }
+  }
+  getCartItems() {
+    console.log('getCartItems', this.state.cartItems);
+    return this.state.cartItems;
+  }
+  getStepControlButtons() {
+    if (this.state.activeKey > 0) {
+      let nextStepEnabled = false;
+      if (this.state.steps[this.state.activeKey].completed === true) {
+        nextStepEnabled = true;
+      }
+      return (
+        <StepControlButtons
+          onClickBack={this.backStep}
+          onClickNext={this.nextStep}
+          nextStepEnabled={nextStepEnabled}
+        />
+      );
+    } else {
+      return <div />;
+    }
+  }
   // called when active step changes
   // either from next button or selecting from step menu
   onStepChange(key) {
@@ -117,14 +181,15 @@ class CartWizard extends Component {
     });
     this.setState({ steps: newSteps });
   }
+  // go back a step
+  backStep() {
+    const newActive = this.state.activeKey - 1;
+    this.onStepChange(newActive);
+  }
   // go to next step
   nextStep() {
     const newActive = this.state.activeKey + 1;
     this.onStepChange(newActive);
-  }
-  // get content for component of this step
-  getStepContent() {
-    return this.state.steps[this.state.activeKey].content;
   }
   // toggle completed
   toggleCompleted(id) {
@@ -136,6 +201,7 @@ class CartWizard extends Component {
   }
   // set this step as completed
   setCompleted() {
+    console.log('setCompleted');
     let initialSteps = this.state.steps;
     let newSteps = _.map(initialSteps, (step, index) => {
       if (step.key === this.state.activeKey) {
@@ -151,6 +217,7 @@ class CartWizard extends Component {
   }
   // set this step as uncompleted
   setUnCompleted() {
+    console.log('setUnCompleted');
     let initialSteps = this.state.steps;
     let newSteps = _.map(initialSteps, (step, index) => {
       if (step.key === this.state.activeKey) {
@@ -164,17 +231,44 @@ class CartWizard extends Component {
     });
     this.setState({ steps: newSteps });
   }
+  setProfile(profile) {
+    console.log('setProfile', profile);
+    this.setState({ profile: profile });
+    this.toggleCompleted(profile);
+  }
+  getSelectedAddressValue() {
+    return this.state.selectedAddressValue;
+  }
+  setSelectedAddressValue(value) {
+    this.setState({ selectedAddressValue: value });
+  }
+  setSelectedAddress(address) {
+    console.log('setSelectedAddress', address);
+    this.setState({ selectedAddress: address });
+    this.toggleCompleted(address);
+  }
+  getSelectedAddress() {
+    console.log('getSelectedAddress', this.state.selectedAddress);
+    return this.state.selectedAddress;
+  }
   setSelectedSource(source) {
     console.log('setSelectedSource', source);
+    this.toggleCompleted(source);
     this.setState({ selectedSource: source });
   }
   getSelectedSource() {
     return this.state.selectedSource;
   }
   setDimmer(dimmed) {
+    console.log('SET DIMMER', dimmed);
     this.setState({ dimmed: dimmed });
   }
+  // get content for component of this step
+  getStepContent() {
+    return this.state.steps[this.state.activeKey].content;
+  }
   render() {
+    console.log('cartwizardstate', this.state);
     return (
       <Container style={{ marginTop: '1em', marginBottom: '6em' }}>
         <Segment raised>
@@ -186,11 +280,19 @@ class CartWizard extends Component {
             onClick={this.onStepChange}
             steps={this.state.steps}
           />
-          <Dimmer.Dimmable as={Segment} dimmed={this.state.dimmed} attached>
+          <Dimmer.Dimmable
+            as={Segment}
+            style={{ paddingBottom: '3em' }}
+            dimmed={this.state.dimmed}
+            attached
+          >
             <Dimmer active={this.state.dimmed} inverted>
               <Loader>Loading</Loader>
             </Dimmer>
-            <StepWrapper>{this.getStepContent()} </StepWrapper>
+            <StepWrapper>
+              {this.getStepContent()}
+              {this.getStepControlButtons()}
+            </StepWrapper>
           </Dimmer.Dimmable>
         </Segment>
       </Container>
@@ -205,6 +307,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onCheckout: cartItems => {
       dispatch(checkout(cartItems));
+    },
+    onChangeQuantity: ({ index, quantity }) => {
+      dispatch(updateQuantity({ index, quantity }));
     },
   };
 };

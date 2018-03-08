@@ -19,13 +19,20 @@ class FirestoreImage extends Component {
   async componentDidMount() {
     if (this.props.canvas) {
       await this.getImage();
+
+      this.state.image.crossOrigin = 'anonymous';
       this.state.image.src = this.state.src;
       this.state.image.onload = async () => {
         // calling set state here will do nothing
         // because properties of Konva.Image are not changed
         // so we need to update layer manually
-        await this.setImageOffset();
-        this.imageNode.getLayer().batchDraw();
+
+        if (this.imageNode) {
+          await this.setImageOffset();
+          this.imageNode.getLayer().batchDraw();
+        } else {
+          console.log('ERROR image node not loaded??');
+        }
       };
     }
   }

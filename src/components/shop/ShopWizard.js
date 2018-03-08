@@ -18,6 +18,7 @@ import {
   setDesignComplete,
 } from '../../actions';
 import AddToCartToastr from './AddToCartToastr';
+import scrollToComponent from 'react-scroll-to-component';
 
 class ShopWizard extends Component {
   constructor(props) {
@@ -81,6 +82,9 @@ class ShopWizard extends Component {
         },
       ],
     };
+  }
+  componentDidMount() {
+    scrollToComponent(this.customizer);
   }
   componentWillUnmount() {
     toastr.remove('addToCartToastr');
@@ -213,7 +217,7 @@ class ShopWizard extends Component {
           <Redirect push to="/cart" />
         ) : (
           <div>
-            <Segment attached="top">
+            <Segment vertical attached="top">
               <Grid
                 centered
                 columns={2}
@@ -230,6 +234,11 @@ class ShopWizard extends Component {
               vertical
               attached
             >
+              <div
+                ref={div => {
+                  this.customizer = div;
+                }}
+              />
               <StepGroup onClick={this.onStepChange} steps={this.state.steps} />
             </Segment>
             <Segment

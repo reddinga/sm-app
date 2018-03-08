@@ -48,11 +48,7 @@ class CardGroupSelect extends Component {
           >
             {opts.content}
             {(opts.header || opts.footer) && (
-              <Card.Content
-                extra
-                textAlign="center"
-                className="darkWhiteBackground"
-              >
+              <Card.Content extra textAlign="center">
                 {opts.header && (
                   <Card.Header textAlign="center">{opts.header}</Card.Header>
                 )}
