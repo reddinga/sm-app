@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Segment, Select } from 'semantic-ui-react';
 
-// [{ key: 'af', value: 'af', flag: 'af', text: 'Afghanistan' }, ...{}]
-
 class CardDropdown extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +17,8 @@ class CardDropdown extends Component {
         if (
           sourceVal &&
           sourceVal !== 'undefined' &&
-          typeof sourceVal === 'object'
+          typeof sourceVal === 'object' &&
+          sourceVal.last4
         ) {
           let iconName;
           switch (sourceVal.brand) {
@@ -52,18 +51,39 @@ class CardDropdown extends Component {
     return sourceList;
   };
   handleChange = (e, { value }) => {
-    console.log('handleChange', value);
+    this.setState({ selectedSource: value });
+    let cardText = '';
+    let cardIcon = '';
+    let card = null;
+    let selectedCard = this.state.cards.find(card => {
+      if (card.value === value) {
+        return true;
+      }
+    });
+    if (selectedCard) {
+      card = {
+        text: selectedCard.text,
+        icon: selectedCard.icon,
+      };
+    }
+    this.props.setSelectedCard(card);
     this.props.onSelectCard(value);
   };
   componentWillReceiveProps(nextProps) {
     if (this.props.sources !== nextProps.sources) {
       this.setState({ cards: this.getCards(nextProps.sources) });
     }
-    console.log('componentWillReceiveProps', nextProps);
   }
   render() {
-    console.log(this.props);
-    console.log('cards', this.state.cards);
+    let selectedSource = this.props.getSelectedSource();
+    let value = null;
+    if (selectedSource) {
+      console.log('selectedSource from props', selectedSource);
+      value = selectedSource;
+    } else if (this.state.selectedSource) {
+      console.log('selectedSource from state');
+      value = this.state.selectedSource;
+    }
     if (this.state.cards && this.state.cards.length > 0) {
       return (
         <div>
@@ -72,6 +92,7 @@ class CardDropdown extends Component {
             placeholder="Select card"
             options={this.state.cards}
             onChange={this.handleChange}
+            value={value}
           />
         </div>
       );

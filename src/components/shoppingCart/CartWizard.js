@@ -30,6 +30,8 @@ class CartWizard extends Component {
     this.setSelectedAddressValue = this.setSelectedAddressValue.bind(this);
     this.setSelectedAddress = this.setSelectedAddress.bind(this);
     this.getSelectedAddress = this.getSelectedAddress.bind(this);
+    this.setSelectedCard = this.setSelectedCard.bind(this);
+    this.getSelectedCard = this.getSelectedCard.bind(this);
     this.setSelectedSource = this.setSelectedSource.bind(this);
     this.getSelectedSource = this.getSelectedSource.bind(this);
     this.getStepControlButtons = this.getStepControlButtons.bind(this);
@@ -49,7 +51,7 @@ class CartWizard extends Component {
         completed: false,
         disabled: false,
         key: 0,
-        description: 'Review your items',
+        description: '',
         content: (
           <Cart
             getCartItems={this.getCartItems}
@@ -80,7 +82,7 @@ class CartWizard extends Component {
         completed: false,
         disabled: true,
         key: 2,
-        description: '',
+        description: 'Enter your shipping address',
         content: (
           <div>
             <Shipping
@@ -94,17 +96,22 @@ class CartWizard extends Component {
         ),
       },
       {
-        title: 'Billing',
+        title: 'Payment',
         icon: 'payment',
         active: false,
         completed: false,
         disabled: true,
         key: 3,
-        description: 'Enter billing information',
+        description: 'Enter your billing information',
         content: (
           <div>
             <Elements>
-              <Payments setSelectedSource={this.setSelectedSource} />
+              <Payments
+                getSelectedSource={this.getSelectedSource}
+                setSelectedSource={this.setSelectedSource}
+                setSelectedCard={this.setSelectedCard}
+                setDimmer={this.setDimmer}
+              />
             </Elements>
           </div>
         ),
@@ -114,16 +121,19 @@ class CartWizard extends Component {
         icon: 'info',
         active: false,
         completed: false,
-        disabled: true,
+        disabled: false, // Testing
         key: 4,
         description: 'Review and place your order',
         content: (
           <div>
             <Confirm
               getSelectedSource={this.getSelectedSource}
+              getSelectedCard={this.getSelectedCard}
+              getSelectedAddress={this.getSelectedAddress}
+              getCartItems={this.getCartItems}
+              total={this.props.total}
               setDimmer={this.setDimmer}
             />
-            <BackButton onClick={this.backStep} />
           </div>
         ),
       },
@@ -143,7 +153,10 @@ class CartWizard extends Component {
     return this.state.cartItems;
   }
   getStepControlButtons() {
-    if (this.state.activeKey > 0) {
+    if (
+      this.state.activeKey > 0 &&
+      this.state.activeKey < this.state.steps.length - 1
+    ) {
       let nextStepEnabled = false;
       if (this.state.steps[this.state.activeKey].completed === true) {
         nextStepEnabled = true;
@@ -250,6 +263,12 @@ class CartWizard extends Component {
   getSelectedAddress() {
     console.log('getSelectedAddress', this.state.selectedAddress);
     return this.state.selectedAddress;
+  }
+  setSelectedCard(card) {
+    this.setState({ selectedCard: card });
+  }
+  getSelectedCard() {
+    return this.state.selectedCard;
   }
   setSelectedSource(source) {
     console.log('setSelectedSource', source);

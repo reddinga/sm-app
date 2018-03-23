@@ -66,7 +66,7 @@ class CardGroupSelect extends Component {
   }
   render() {
     return (
-      <Segment raised style={{ margin: '1em' }}>
+      <Segment className="no-borders" style={{ margin: '1em' }}>
         <Grid
           centered
           columns={this.props.itemsPerRow}

@@ -7,10 +7,15 @@ import 'typeface-abhaya-libre';
 // Redux
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
+import { persistStore, persistReducer, autoRehydrate } from 'redux-persist';
+//import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web and AsyncStorage for react-native
+//import { PersistGate } from 'redux-persist/es/integration/react';
+
 import { reduxFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
+import 'firebase/auth'; // necessary?
 import 'firebase/database';
 import 'firebase/storage';
 
@@ -68,6 +73,7 @@ const createStoreWithFirebase = compose(
     reduxThunk.withExtraArgument(getFirebase),
     logger,
   ), // firebase instance as first argument
+  autoRehydrate(),
 )(createStore);
 
 // Create store with reducers and initial state
@@ -77,6 +83,8 @@ const store = createStoreWithFirebase(reducers, initialState);
 store.firebaseAuthIsReady.then(() => {
   console.log('Auth has loaded'); // eslint-disable-line no-console
 });
+
+persistStore(store, { whitelist: ['cartItems', 'firebase', 'firestore'] });
 ReactDOM.render(
   <Provider store={store}>
     <StripeProvider apiKey={'pk_test_a3MHx3gWetXNtlpIAh1BABJm'}>

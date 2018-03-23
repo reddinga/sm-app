@@ -110,7 +110,7 @@ class Customize extends Component {
   render() {
     console.log(this.props);
     return (
-      <Segment raised style={{ margin: '1em' }}>
+      <Segment className="no-borders" style={{ margin: '1em' }}>
         <Container>
           <h3 style={{ marginTop: 0 }}>Select option: </h3>
           <Dropdown

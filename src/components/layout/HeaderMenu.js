@@ -5,6 +5,7 @@ import {
   Grid,
   Image,
   Responsive,
+  Dropdown,
   Segment,
   Message,
 } from 'semantic-ui-react';
@@ -12,21 +13,26 @@ import { Link, withRouter } from 'react-router-dom';
 import logo from '../../assets/images/logo/logo_leaf.png';
 import header1 from '../../assets/images/logo/header1.png';
 import header2 from '../../assets/images/logo/header2.png';
+import SideMenu from './SideMenu';
 
 class HeaderMenu extends Component {
   state = { activeItem: this.props.location.pathname };
-
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.state.activeItem) {
+      this.setState({ activeItem: nextProps.location.pathname });
+    }
+  }
   handleItemClick = (e, { to }) => this.setState({ activeItem: to });
 
   render() {
     const { activeItem } = this.state;
     return (
-      <Segment.Group style={{ margin: '0px' }}>
+      <Segment.Group className="no-borders" style={{ margin: '0px' }}>
         <Message style={{ padding: '0.25em' }} attached="top">
           Free Shipping on Orders Over $100
           {/*<Image src={flower} size="mini" />*/}
         </Message>
-        <Segment>
+        <Segment className="no-borders" attached>
           <Responsive minWidth={768}>
             <Grid verticalAlign="middle" columns="equal" centered>
               <Grid.Row>
@@ -73,7 +79,11 @@ class HeaderMenu extends Component {
             </Grid>
           </Responsive>
         </Segment>
-        <Segment style={{ margin: '0px', padding: '0px' }}>
+        <Segment
+          className="no-borders"
+          attached
+          style={{ margin: '0px', padding: '0px' }}
+        >
           <Menu
             style={{
               margin: '0em 0em',
@@ -81,7 +91,7 @@ class HeaderMenu extends Component {
             pointing
             secondary
             size="large"
-            widths={4}
+            widths={5}
           >
             <Menu.Item
               as={Link}
@@ -92,14 +102,42 @@ class HeaderMenu extends Component {
             >
               home
             </Menu.Item>
+            <Dropdown item text="shop">
+              <Dropdown.Menu>
+                <Dropdown.Item
+                  as={Link}
+                  to="/shop/arrangements"
+                  text="arrangements"
+                  active={activeItem === '/shop/arrangements'}
+                  onClick={this.handleItemClick}
+                />
+
+                <Dropdown.Item
+                  as={Link}
+                  to="/shop/wreaths"
+                  text="wreaths"
+                  active={activeItem === '/shop/wreaths'}
+                  onClick={this.handleItemClick}
+                />
+
+                <Dropdown.Item
+                  as={Link}
+                  to="/shop/bouquets"
+                  text="bouquets"
+                  active={activeItem === '/shop/bouquets'}
+                  onClick={this.handleItemClick}
+                />
+              </Dropdown.Menu>
+            </Dropdown>
+
             <Menu.Item
               as={Link}
-              to="/shop"
-              name="shop"
-              active={activeItem === '/shop'}
+              to="/custom"
+              name="custom"
+              active={activeItem === '/custom'}
               onClick={this.handleItemClick}
             >
-              shop
+              custom
             </Menu.Item>
             <Menu.Item
               as="a"

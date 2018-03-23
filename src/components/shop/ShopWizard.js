@@ -217,7 +217,7 @@ class ShopWizard extends Component {
           <Redirect push to="/cart" />
         ) : (
           <div>
-            <Segment vertical attached="top">
+            <Segment className="no-borders" vertical attached="top">
               <Grid
                 centered
                 columns={2}
@@ -229,6 +229,7 @@ class ShopWizard extends Component {
               </Grid>
             </Segment>
             <Segment
+              className="no-borders"
               size="mini"
               style={{ padding: '0em 0em' }}
               vertical
@@ -242,6 +243,7 @@ class ShopWizard extends Component {
               <StepGroup onClick={this.onStepChange} steps={this.state.steps} />
             </Segment>
             <Segment
+              className="no-borders"
               style={{ paddingBottom: '6em' }}
               vertical
               attached="bottom"

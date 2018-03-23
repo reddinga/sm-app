@@ -13,19 +13,19 @@ class Preview extends Component {
       return <PreviewCanvas preview={preview} />;
     } else {
       return (
-        <div>
+        <Segment raised compact>
           <Stage width={350} height={295}>
             <Layer />
           </Stage>
 
           <h2>Preview Your Design Here</h2>
-        </div>
+        </Segment>
       );
     }
   }
   render() {
     return (
-      <Segment raised compact>
+      <Segment className="no-borders" compact>
         {this.getPreview()}
       </Segment>
     );

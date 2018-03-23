@@ -61,6 +61,12 @@ class Shipping extends Component {
         toastr.error(err);
       });
   }
+  componentWillUnmount() {
+    this.props.firebase
+      .database()
+      .ref(`/users/${this.props.auth.uid}/addresses`)
+      .off('child_added');
+  }
   listen = () => {
     if (this.props.firebase && this.props.auth) {
       let addressLength = 0;
@@ -74,7 +80,10 @@ class Shipping extends Component {
           console.log('child_added event', event);
           console.log('child_added prevChildKey', prevChildKey);
           console.log('child_added addressLength', addressLength);
-          if (prevChildKey !== null && prevChildKey >= addressLength - 1) {
+          if (
+            (prevChildKey !== null && prevChildKey >= addressLength - 1) ||
+            (prevChildKey === null && addressLength === 0)
+          ) {
             const newAddress = event.val();
             console.log('address add succeeded!', newAddress);
 
@@ -126,7 +135,7 @@ class Shipping extends Component {
             <Accordion.Content active={activeIndex === 0}>
               <AddressForm onSubmit={this.handleSubmitAddress} />
             </Accordion.Content>
-          </Accordion>{' '}
+          </Accordion>
         </Segment>
       </Segment>
     );

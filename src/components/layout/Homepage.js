@@ -12,6 +12,7 @@ import {
   Visibility,
   Responsive,
   Card,
+  Dropdown,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import FirestoreImage from '../common/FirestoreImage';
@@ -21,20 +22,32 @@ import backgroundMobile from '../../assets/images/background/bring_spring_inside
 const dividerSrc = '../../assets/images/decorative/divider_simple.png';
 
 const FixedMenu = () => (
-  <Menu fixed="top" size="large">
+  <Menu fixed="top" size="large" widths={5}>
     <Container>
       <Menu.Item as={Link} to="/" active>
-        Home
+        home
       </Menu.Item>
-      <Menu.Item as={Link} to="/shop">
-        Shop
+      <Dropdown item text="shop">
+        <Dropdown.Menu>
+          <Dropdown.Item
+            as={Link}
+            to="/shop/arrangements"
+            text="arrangements"
+          />
+
+          <Dropdown.Item as={Link} to="/shop/wreaths" text="wreaths" />
+
+          <Dropdown.Item as={Link} to="/shop/bouquets" text="bouquets" />
+        </Dropdown.Menu>
+      </Dropdown>
+      <Menu.Item as={Link} to="/custom">
+        custom
       </Menu.Item>
-      <Menu.Item as="a">About us</Menu.Item>
-      <Menu.Item position="right">
-        <Button as="a">Log in</Button>
-        <Button as="a" style={{ marginLeft: '0.5em' }}>
-          Sign Up
-        </Button>
+      <Menu.Item as={Link} to="/about">
+        about us
+      </Menu.Item>
+      <Menu.Item positiona="right" as={Link} to="/cart" name="cart">
+        <Icon name="shopping bag" />
       </Menu.Item>
     </Container>
   </Menu>
@@ -74,17 +87,16 @@ export default class Homepage extends Component {
       <Container text>
         <Button
           primary
-          size="large"
+          size="medium"
           as={Link}
-          to="/shop"
+          to="/custom"
           style={{
             fontSize: '1.5em',
-            fontWeight: 'bold',
             marginBottom: '0',
             marginTop: mobile ? '11em' : '11em',
           }}
         >
-          Choose a Style
+          start customizing
           <Icon name="right arrow" />
         </Button>
       </Container>
@@ -123,7 +135,7 @@ export default class Homepage extends Component {
           </Responsive>
         </Visibility>
 
-        <Segment>
+        <Segment className="no-borders">
           <Container text>
             <Grid
               doubling
@@ -134,25 +146,29 @@ export default class Homepage extends Component {
             >
               <Grid.Row>
                 <Grid.Column textAlign="center">
-                  <Header as="h1">Handmade Custom Designs</Header>
+                  <Header as="h1" />
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row columns={3}>
-                <Grid.Column textAlign="center">
+                <Grid.Column
+                  textAlign="center"
+                  as={Link}
+                  to="/shop/arrangements"
+                >
                   <FirestoreImage
                     src="/images/products/peony-vase_300.png"
                     size="medium"
                   />
                   <p>ARRANGEMENTS</p>
                 </Grid.Column>
-                <Grid.Column textAlign="center">
+                <Grid.Column textAlign="center" as={Link} to="/shop/wreaths">
                   <FirestoreImage
                     src="/images/products/peony-flower-wreath_300.png"
                     size="medium"
                   />
                   <p>WREATHS</p>
                 </Grid.Column>
-                <Grid.Column textAlign="center">
+                <Grid.Column textAlign="center" as={Link} to="/shop/bouquets">
                   <FirestoreImage
                     src="/images/products/white-peony-bouquet.png"
                     size="medium"
@@ -163,21 +179,57 @@ export default class Homepage extends Component {
             </Grid>
           </Container>
         </Segment>
-        <Segment>
+        <Divider />
+        <Segment className="no-borders" style={{ paddingTop: '1.8em' }}>
           <Container text>
             <Grid relaxed="very">
               <Grid.Row>
                 <Grid.Column textAlign="center">
-                  <Header as="h1">Florals for All Occasions</Header>
+                  <Header as="h1">Quality and Styles that Last</Header>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Grid.Column textAlign="center">
+                  <p>
+                    We always use the highest quality faux florals in our
+                    products <br /> Our "Real Touch" faux flowers look and feel
+                    just like natural flowers
+                    <br />
+                    <br />
+                    Shop our timeless products to brighten your home for years
+                    to come!
+                  </p>
+
+                  <Button
+                    primary
+                    size="small"
+                    as={Link}
+                    to="/shop"
+                    style={{
+                      fontSize: '1em',
+                    }}
+                  >
+                    shop
+                  </Button>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Container>
+        </Segment>
+        <Divider />
+        <Segment className="no-borders">
+          <Container text>
+            <Grid relaxed="very">
+              <Grid.Row>
+                <Grid.Column textAlign="center">
+                  <Header as="h1">Custom Florals for All Occasions</Header>
                 </Grid.Column>
               </Grid.Row>
 
               <Grid.Row style={{ paddingBottom: '0em' }}>
                 <Grid.Column textAlign="center">
-                  <p>
-                    All designs are customized with the flowers and colors of
-                    your choice. <br />Our products are ideal for:
-                  </p>
+                  <p>Online customization is quick, fun, and easy!</p>
+                  <p>Perfect for:</p>
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row style={{ paddingTop: '1em', paddingBottom: '1em' }}>
@@ -185,17 +237,17 @@ export default class Homepage extends Component {
                   <List>
                     <List.Item>
                       <List.Content>
-                        <strong>HOME DECOR</strong>
-                        <List.Description>
-                          Perfectly coordinated with your style
-                        </List.Description>
-                      </List.Content>
-                    </List.Item>
-                    <List.Item>
-                      <List.Content>
                         <strong>CUSTOM GIFTS</strong>
                         <List.Description>
                           With your recipient's favorite colors and flowers
+                        </List.Description>
+                      </List.Content>
+                    </List.Item>{' '}
+                    <List.Item>
+                      <List.Content>
+                        <strong>HOME DECOR</strong>
+                        <List.Description>
+                          Perfectly coordinated with your style
                         </List.Description>
                       </List.Content>
                     </List.Item>
@@ -222,74 +274,18 @@ export default class Homepage extends Component {
                 <Grid.Column textAlign="center">
                   <Button
                     secondary
-                    size="medium"
+                    size="small"
                     as={Link}
-                    to="/shop"
+                    to="/custom"
                     style={{
-                      fontSize: '1.25em',
+                      fontSize: '1em',
                     }}
                   >
-                    Start Customizing
-                    <Icon name="right arrow" />
+                    customize
                   </Button>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
-          </Container>
-        </Segment>
-        {/*  <Divider horizontal style={{ padding: '1em 0em' }}>
-          <Icon disabled name="wizard" size="mini" />
-        </Divider> */}
-        <Segment style={{ paddingTop: '1.8em' }}>
-          <Container text>
-            <Grid relaxed="very">
-              <Grid.Row>
-                <Grid.Column textAlign="center">
-                  <Header as="h1">Quality and Styles that Last</Header>
-                </Grid.Column>
-              </Grid.Row>
-              <Grid.Row>
-                <Grid.Column textAlign="center">
-                  <p>
-                    We always use the highest quality faux florals in our
-                    products. <br />"Real Touch" faux flowers look and feel just
-                    like natural flowers.
-                    <br />
-                    <br />
-                    We start with designs that are classic and timeless&mdash;{' '}
-                    <br />
-                    <em>you</em> make them unique.
-                  </p>
-
-                  <Button
-                    primary
-                    size="medium"
-                    as={Link}
-                    to="/shop"
-                    style={{
-                      fontSize: '1.25em',
-                    }}
-                  >
-                    Shop
-                  </Button>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </Container>
-        </Segment>
-
-        <Segment inverted vertical style={{ padding: '5em 0em' }}>
-          <Container>
-            <Grid divided inverted stackable>
-              <Grid.Row>
-                <Grid.Column textAlign="center">
-                  <List link inverted>
-                    <List.Item as="a">Contact Us</List.Item>
-                  </List>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-            <small>&copy; Copyright 2018, Silver Maple Studio</small>
           </Container>
         </Segment>
       </div>

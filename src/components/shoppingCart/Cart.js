@@ -36,7 +36,7 @@ class Cart extends Component {
             {total > 0 && (
               <p style={{ fontSize: '1.5em' }}>Total: &#36;{total}</p>
             )}
-          </Grid.Column>{' '}
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     );
@@ -55,7 +55,7 @@ class Cart extends Component {
         <div>
           {hasCartItems ? (
             <div>
-              this.getCartSection(cartItems)
+              {this.getCartSection(cartItems)}
               <Button
                 primary
                 style={{ marginTop: '1em' }}

@@ -37,3 +37,28 @@
 .darkWhiteBackground {
   background-color: #f3f4f5 !important;
 }
+.whiteBackground {
+  background-color: #ffffff !important;
+}
+.main-container {
+  min-height: 100vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 50px; /* height of your footer */
+}
+.app-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.no-borders {
+  border: none !important;
+  box-shadow: none !important;
+}
+.full-height {
+  height: 100vh;
+}
+/* .redux-toastr .toastr.rrt-success {
+  background-color: @primaryColor !important;
+} */

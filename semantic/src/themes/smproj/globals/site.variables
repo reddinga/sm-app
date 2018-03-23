@@ -117,7 +117,7 @@
         Page
 --------------------*/
 
-@pageBackground      : lighten(@lightSecondaryColor, 15);
+@pageBackground      : @white;
 @pageOverflowX       : hidden;
 
 @lineHeight          : 1.4285em;
