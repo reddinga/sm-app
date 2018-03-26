@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import SideMenu from './SideMenu';
 import { Segment, Container } from 'semantic-ui-react';
-import { Route, Switch } from 'react-router-dom';
-import StorePage from '../store/StorePage';
+import { Route } from 'react-router-dom';
 import ProductPage from '../product/ProductPage';
 
-class StoreLayout extends Component {
+class ProductLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -19,10 +18,10 @@ class StoreLayout extends Component {
           marginBottom: '2em',
         }}
       >
-        <Route path={`/shop/:categoryId`} component={StorePage} />
+        <Route path={`/product/:productId`} component={ProductPage} />
       </Container>
     );
   }
 }
 
-export default StoreLayout;
+export default ProductLayout;

@@ -41,6 +41,7 @@ class StorePage extends Component {
                 style={{ width: 150 }}
                 key={product.id}
                 product={product}
+                categoryId={this.state.categoryId}
               />
             </Grid.Column>
           );
@@ -51,6 +52,7 @@ class StorePage extends Component {
   }
   render() {
     const { match } = this.props;
+    console.log('StorePage props', this.props);
     let categoryId = this.state.categoryId;
     return (
       <Grid centered doubling textAlign="center" relaxed columns={4}>

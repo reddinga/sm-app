@@ -1,7 +1,6 @@
 import React from 'react';
-import { Segment, Container, Grid, List } from 'semantic-ui-react';
-import FirestoreImage from '../common/FirestoreImage';
+import SMImage from '../common/SMImage';
 
 export default props => {
-  return <FirestoreImage src={props.product.src} />;
+  return <SMImage src={props.product.src} />;
 };
