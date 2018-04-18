@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import StepGroup from '../common/StepGroup';
 import StepWrapper from '../common/StepWrapper';
-import { checkout, updateQuantity } from '../../actions';
+import { checkout, updateQuantity, emptyCart } from '../../actions';
 import Cart from './Cart';
 import Login from './Login';
 import Shipping from './Shipping';
@@ -58,6 +58,7 @@ class CartWizard extends Component {
             total={this.props.total}
             onChangeQuantity={this.props.onChangeQuantity}
             onCheckoutClicked={() => {}}
+            onEmptyCart={this.props.onEmptyCart}
           />
         ),
       },
@@ -326,6 +327,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onCheckout: cartItems => {
       dispatch(checkout(cartItems));
+    },
+    onEmptyCart: cartItems => {
+      dispatch(emptyCart());
     },
     onChangeQuantity: ({ index, quantity }) => {
       dispatch(updateQuantity({ index, quantity }));

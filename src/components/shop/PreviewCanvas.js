@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Stage, Layer } from 'react-konva';
-import FirestoreImage from '../common/FirestoreImage';
+import SMCanvasImage from '../common/SMCanvasImage';
 //import { FacebookShareButton, FacebookIcon } from 'react-share';
 
 class PreviewStage extends Component {
@@ -48,20 +48,13 @@ class PreviewStage extends Component {
             height={350}
           >
             <Layer key={`preview-layer-${preview.id}`}>
-              <FirestoreImage
+              <SMCanvasImage
                 key={`preview-base-key-${preview.id}`}
                 {...preview}
-                canvas={true}
               />
               {preview.opts.map(choices => {
                 if (choices.id && choices.src) {
-                  return (
-                    <FirestoreImage
-                      key={choices.id}
-                      {...choices}
-                      canvas={true}
-                    />
-                  );
+                  return <SMCanvasImage key={choices.id} {...choices} />;
                 } else {
                   return null;
                 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Grid, Dropdown } from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
 
 const getQuantityOptions = () => {
   let range = _.range(1, 11);
@@ -21,11 +22,24 @@ class Product extends Component {
       this.props.onUpdateQty(this.props.index, data.value);
     }
   };
+  getImage(imageUri) {
+    console.log('imageUri');
+    var img = document.createElement('img');
+    img.src = imageUri;
+    // document.body.appendChild(img);
+    return <div>{img}</div>;
+    // <Image src={imageUri} />;
+  }
   render() {
-    let { price, quantity, title } = this.props;
+    let { price, quantity, title, imageUri } = this.props;
     return (
       <Grid.Row>
-        <Grid.Column textAlign="left" width={11}>
+        {imageUri && (
+          <Grid.Column width={3}>
+            <img src={imageUri} width={30} height={30} />
+          </Grid.Column>
+        )}
+        <Grid.Column textAlign="left" width={8}>
           {title} -
           {new Intl.NumberFormat('en-US', {
             style: 'currency',

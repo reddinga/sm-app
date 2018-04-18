@@ -3,7 +3,7 @@ import { toastr } from 'react-redux-toastr';
 import { Icon } from 'semantic-ui-react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import AddToCart from './AddToCart';
+import AddToCart from '../common/AddToCart';
 import { bindActionCreators } from 'redux';
 import { actions as toastrActions } from 'react-redux-toastr';
 class ShoppingCartToastr extends Component {

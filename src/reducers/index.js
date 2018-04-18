@@ -6,7 +6,7 @@ import { reducer as formReducer } from 'redux-form';
 import * as types from '../actions/types';
 
 function style(state = null, action) {
-  console.log('action: ', action);
+  console.log('style action: ', action);
   switch (action.type) {
     case types.SET_STYLE:
       return action.id;
@@ -15,6 +15,7 @@ function style(state = null, action) {
   }
 }
 function design(state = null, action) {
+  console.log('design action: ', action);
   switch (action.type) {
     case types.SET_DESIGN:
       return action.id;
@@ -23,6 +24,7 @@ function design(state = null, action) {
   }
 }
 function designOptions(state = null, action) {
+  console.log('designOptions action: ', action);
   switch (action.type) {
     case types.SET_DESIGN_OPTIONS:
       return action.opts;
@@ -31,7 +33,7 @@ function designOptions(state = null, action) {
   }
 }
 function customDesign(state = null, action) {
-  console.log(action);
+  console.log('customDesign action: ', action);
   switch (action.type) {
     case types.SET_CUSTOMIZATIONS:
       return action.customizations;
@@ -40,7 +42,7 @@ function customDesign(state = null, action) {
   }
 }
 function designComplete(state = false, action) {
-  console.log(action);
+  console.log('designComplete action: ', action);
   switch (action.type) {
     case types.SET_DESIGN_COMPLETE:
       return action.complete;
@@ -50,6 +52,7 @@ function designComplete(state = false, action) {
 }
 
 function cartItems(state = [], action) {
+  console.log('cartItems action: ', action);
   switch (action.type) {
     case 'ADD_TO_CART':
       return [
@@ -59,6 +62,8 @@ function cartItems(state = [], action) {
           quantity: 1,
         },
       ];
+    case 'EMPTY_CART':
+      return [];
     case 'UPDATE_CART_ITEM_QUANTITY':
       console.log('update qty reducer', action);
       console.log('state', state);

@@ -20,6 +20,7 @@ class Cart extends Component {
       return (
         <Product
           index={index}
+          imageUri={product.cartItem.imageUri}
           onUpdateQty={this.updateQuantity}
           title={product.cartItem.title}
           price={product.cartItem.price}
@@ -63,7 +64,15 @@ class Cart extends Component {
                 disabled={hasCartItems ? false : true}
               >
                 Checkout
-              </Button>{' '}
+              </Button>
+              <Button
+                secondary
+                style={{ marginTop: '1em' }}
+                onClick={this.props.onEmptyCart}
+                disabled={hasCartItems ? false : true}
+              >
+                Empty Cart
+              </Button>
             </div>
           ) : (
             <em>Your bag is empty.</em>

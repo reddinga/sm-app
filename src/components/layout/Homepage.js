@@ -15,7 +15,7 @@ import {
   Dropdown,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import FirestoreImage from '../common/FirestoreImage';
+import SMImage from '../common/SMImage';
 import background from '../../assets/images/background/bring_spring_inside.png';
 import backgroundMobile from '../../assets/images/background/bring_spring_inside_mobile.png';
 
@@ -155,22 +155,22 @@ export default class Homepage extends Component {
                   as={Link}
                   to="/shop/arrangements"
                 >
-                  <FirestoreImage
-                    src="/images/products/peony-vase_300.png"
+                  <SMImage
+                    src="images/products/peony-vase_300.png"
                     size="medium"
                   />
                   <p>ARRANGEMENTS</p>
                 </Grid.Column>
                 <Grid.Column textAlign="center" as={Link} to="/shop/wreaths">
-                  <FirestoreImage
-                    src="/images/products/peony-flower-wreath_300.png"
+                  <SMImage
+                    src="images/products/peony-flower-wreath_300.png"
                     size="medium"
                   />
                   <p>WREATHS</p>
                 </Grid.Column>
                 <Grid.Column textAlign="center" as={Link} to="/shop/bouquets">
-                  <FirestoreImage
-                    src="/images/products/white-peony-bouquet.png"
+                  <SMImage
+                    src="images/products/white-peony-bouquet.png"
                     size="medium"
                   />
                   <p>BOUQUETS</p>

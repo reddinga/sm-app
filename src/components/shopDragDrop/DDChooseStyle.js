@@ -6,13 +6,23 @@ import CardGroupSelect from '../common/CardGroupSelect';
 import { Container } from 'semantic-ui-react';
 import SMImage from '../common/SMImage';
 
-class ChooseStyle extends Component {
+class DDChooseStyle extends Component {
   constructor(props) {
     super(props);
     this.handleChoiceChange = this.handleChoiceChange.bind(this);
   }
   handleChoiceChange(data) {
-    this.props.setStyle(data.id);
+    let chosenStyle = this.props.styles.find(style => {
+      if (style.id === data.id) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    if (chosenStyle && typeof chosenStyle !== 'undefined') {
+      console.log('chosenStyle', chosenStyle);
+      this.props.setStyle(chosenStyle);
+    }
   }
   getStyleOptions() {
     if (this.props.styles) {
@@ -47,5 +57,5 @@ const mapStateToProps = (state, props) => {
 };
 
 export default compose(firestoreConnect(['styles']), connect(mapStateToProps))(
-  ChooseStyle,
+  DDChooseStyle,
 );

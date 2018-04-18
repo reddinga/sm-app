@@ -25,6 +25,9 @@ export function updateQuantity({ index, quantity }) {
     quantity: quantity,
   };
 }
+export function emptyCart() {
+  return { type: types.EMPTY_CART };
+}
 export function checkout(items) {
   return { type: types.CHECKOUT_REQUEST, items };
 }

@@ -6,7 +6,7 @@ import CardGroupSelect from '../common/CardGroupSelect';
 import { connect } from 'react-redux';
 import { Container } from 'semantic-ui-react';
 import { setDesignOptions, setCustomizations } from '../../actions';
-import FirestoreImage from '../common/FirestoreImage';
+import SMCanvasImage from '../common/SMCanvasImage';
 
 class ChooseDesign extends Component {
   constructor(props) {
@@ -127,17 +127,12 @@ class ChooseDesign extends Component {
                 height={225}
               >
                 <Layer key={`layer-${baseProps.id}`}>
-                  <FirestoreImage
-                    key={baseProps.id}
-                    {...baseProps}
-                    canvas={true}
-                  />
+                  <SMCanvasImage key={baseProps.id} {...baseProps} />
                   {baseProps.opts.map(props => {
                     return (
-                      <FirestoreImage
+                      <SMCanvasImage
                         key={props.id + '-' + props.name}
                         {...props}
-                        canvas={true}
                       />
                     );
                   })}

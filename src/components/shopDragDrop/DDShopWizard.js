@@ -2,35 +2,27 @@ import React, { Component } from 'react';
 import { Segment, Grid } from 'semantic-ui-react';
 import _ from 'lodash';
 import { Redirect } from 'react-router-dom';
-import { toastr } from 'react-redux-toastr';
 import StepGroup from '../common/StepGroup';
-import ChooseStyle from './ChooseStyle';
-import ChooseDesign from './ChooseDesign';
-import Preview from './Preview';
-import Customize from './Customize';
+import DDChooseStyle from './DDChooseStyle';
+import DDPreview from './DDPreview';
+import DDCustomize from './DDCustomize';
 import { connect } from 'react-redux';
 import {
   addToCart,
   setStyle,
-  setDesign,
-  setDesignOptions,
   setCustomizations,
-  setDesignComplete,
+  setDesignOptions,
 } from '../../actions';
-import AddToCartToastr from '../common/AddToCartToastr';
 import scrollToComponent from 'react-scroll-to-component';
 
-class ShopWizard extends Component {
+class DDShopWizard extends Component {
   constructor(props) {
     super(props);
 
     this.onStepChange = this.onStepChange.bind(this);
     this.setStyle = this.setStyle.bind(this);
     this.getStyle = this.getStyle.bind(this);
-    this.setDesign = this.setDesign.bind(this);
-    this.getDesign = this.getDesign.bind(this);
     this.nextStep = this.nextStep.bind(this);
-    this.setDesignComplete = this.setDesignComplete.bind(this);
     this.addDesignToCart = this.addDesignToCart.bind(this);
     this.goToCart = this.goToCart.bind(this);
 
@@ -38,7 +30,6 @@ class ShopWizard extends Component {
       redirect: false,
       activeKey: 0,
       style: this.props.style,
-      design: this.props.design,
       steps: [
         {
           title: 'Select Style',
@@ -48,25 +39,9 @@ class ShopWizard extends Component {
           key: 0,
           description: '',
           content: (
-            <ChooseStyle
+            <DDChooseStyle
               nextStep={this.nextStep}
               setStyle={this.setStyle}
-              getStyle={this.getStyle}
-            />
-          ),
-        },
-        {
-          title: 'Select Design',
-          active: false,
-          completed: false,
-          disabled: true,
-          key: 1,
-          description: '',
-          content: (
-            <ChooseDesign
-              nextStep={this.nextStep}
-              setDesign={this.setDesign}
-              getDesign={this.getDesign}
               getStyle={this.getStyle}
             />
           ),
@@ -76,9 +51,14 @@ class ShopWizard extends Component {
           active: false,
           completed: false,
           disabled: true,
-          key: 2,
+          key: 1,
           description: '',
-          content: <Customize setDesignComplete={this.setDesignComplete} />,
+          content: (
+            <DDCustomize
+              getStyle={this.getStyle}
+              addDesignToCart={this.addDesignToCart}
+            />
+          ),
         },
       ],
     };
@@ -87,14 +67,11 @@ class ShopWizard extends Component {
     scrollToComponent(this.customizer);
   }
   componentWillUnmount() {
-    toastr.remove('addToCartToastr');
+    console.log('unmount ddshopwizard');
     this.props.onStyleSelect(null);
-    this.props.onDesignSelect(null);
-    this.props.setCustomizations(null);
     this.props.onSetDesignOptions(null);
-    this.props.onSetDesignComplete(false);
+    this.props.setCustomizations(null);
   }
-
   // called when active step changes
   // either from next button or selecting from step menu
   onStepChange(key) {
@@ -166,50 +143,45 @@ class ShopWizard extends Component {
     this.setState({ steps: newSteps });
   }
   // set style choice
-  setStyle(id) {
-    this.setState({ style: id });
-    this.props.onStyleSelect(id);
-    this.toggleCompleted(id);
-    // when setting style to new options or null,
-    // set any previous design choices to null
-    this.props.setCustomizations(null);
-    this.props.onSetDesignOptions(null);
-    this.setState({ design: null });
-    this.props.onDesignSelect(null);
+  setStyle(style) {
+    this.setState({ style: style.id });
+    // add style to store
+    this.props.onStyleSelect(style.id);
+    this.toggleCompleted(style.id);
+    // set available options
+    this.props.onSetDesignOptions(style.options);
+    // set base for customizations
+    this.props.setCustomizations({
+      id: style.id,
+      name: '',
+      price: null,
+      base: style.base,
+      imageUri: null,
+      addedOptions: [],
+    });
   }
-  // get style choide
+  // get style choice
   getStyle() {
     return this.state.style;
   }
-  // set design choice
-  setDesign(id) {
-    this.setState({ design: id });
-    this.props.onDesignSelect(id);
-    this.toggleCompleted(id);
-  }
-  // get design choice
-  getDesign() {
-    return this.state.design;
-  }
-  setDesignComplete(complete) {
-    this.props.onSetDesignComplete(complete);
-  }
   addDesignToCart() {
     const cartItem = {
-      design: this.state.design,
       customDesign: this.props.customDesign,
       title: this.props.customDesign.name,
       price: this.props.customDesign.price,
+      imageUri: this.props.customDesign.imageUri,
     };
     console.log('addToCart', cartItem);
+    // store image of design in store
+
+    // adds item to cart store
     this.props.onAddToCart(cartItem);
-    this.props.onSetDesignComplete(false);
+    // go to cart page
     this.goToCart();
   }
   goToCart() {
     this.setState({ redirect: true });
   }
-
   render() {
     return (
       <div>
@@ -217,7 +189,12 @@ class ShopWizard extends Component {
           <Redirect push to="/cart" />
         ) : (
           <div>
-            <Segment className="no-borders" vertical attached="top">
+            <Segment
+              style={{ paddingBottom: '0px' }}
+              className="no-borders"
+              vertical
+              attached="top"
+            >
               <Grid
                 centered
                 columns={2}
@@ -225,7 +202,7 @@ class ShopWizard extends Component {
                 style={{ padding: '1em 1em' }}
                 attached="top"
               >
-                <Preview />
+                <DDPreview />
               </Grid>
             </Segment>
             <Segment
@@ -244,7 +221,7 @@ class ShopWizard extends Component {
             </Segment>
             <Segment
               className="no-borders"
-              style={{ paddingBottom: '6em' }}
+              style={{ paddingBottom: '6em', paddingTop: '0em' }}
               vertical
               attached="bottom"
             >
@@ -252,11 +229,6 @@ class ShopWizard extends Component {
             </Segment>
           </div>
         )}
-
-        <AddToCartToastr
-          show={this.props.designComplete}
-          onClick={this.addDesignToCart}
-        />
       </div>
     );
   }
@@ -271,9 +243,6 @@ const mapDispatchToProps = dispatch => {
     onStyleSelect: id => {
       dispatch(setStyle(id));
     },
-    onDesignSelect: id => {
-      dispatch(setDesign(id));
-    },
     onSetDesignOptions: opts => {
       dispatch(setDesignOptions(opts));
     },
@@ -283,10 +252,7 @@ const mapDispatchToProps = dispatch => {
     setCustomizations: base => {
       dispatch(setCustomizations(base));
     },
-    onSetDesignComplete: complete => {
-      dispatch(setDesignComplete(complete));
-    },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShopWizard);
+export default connect(mapStateToProps, mapDispatchToProps)(DDShopWizard);

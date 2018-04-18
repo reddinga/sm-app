@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import ShopWizard from '../shop/ShopWizard';
-import AddToCartToastr from '../shop/AddToCartToastr';
+import DDShopWizard from '../shopDragDrop/DDShopWizard';
+import AddToCartToastr from '../common/AddToCartToastr';
 
 class ShopLayout extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class ShopLayout extends Component {
     return (
       <div>
         <AddToCartToastr />
-        <ShopWizard />
+        <DDShopWizard />
       </div>
     );
   }

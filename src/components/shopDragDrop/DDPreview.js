@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Stage, Layer } from 'react-konva';
-import PreviewCanvas from './PreviewCanvas';
+import DDPreviewCanvas from './DDPreviewCanvas';
 
-class Preview extends Component {
+class DDPreview extends Component {
   getPreview() {
-    const preview = this.props.customDesign;
-    console.log(preview);
-    if (preview) {
-      return <PreviewCanvas preview={preview} />;
+    const customDesign = this.props.customDesign;
+    if (customDesign) {
+      return <DDPreviewCanvas customDesign={customDesign} />;
     } else {
       return (
         <Segment raised compact>
@@ -39,4 +38,4 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Preview);
+export default connect(mapStateToProps, mapDispatchToProps)(DDPreview);
