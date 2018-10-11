@@ -22,12 +22,12 @@ import backgroundMobile from '../../assets/images/background/bring_spring_inside
 const dividerSrc = '../../assets/images/decorative/divider_simple.png';
 
 const FixedMenu = () => (
-  <Menu fixed="top" size="large" widths={5}>
+  <Menu fixed="top" size="large" widths={4}>
     <Container>
       <Menu.Item as={Link} to="/" active>
-        home
+        <Header as="h4">home</Header>
       </Menu.Item>
-      <Dropdown item text="shop">
+      {/*       <Dropdown item text="shop">
         <Dropdown.Menu>
           <Dropdown.Item
             as={Link}
@@ -39,15 +39,17 @@ const FixedMenu = () => (
 
           <Dropdown.Item as={Link} to="/shop/bouquets" text="bouquets" />
         </Dropdown.Menu>
-      </Dropdown>
+      </Dropdown> */}
       <Menu.Item as={Link} to="/custom">
-        custom
+        <Header as="h4">custom</Header>
       </Menu.Item>
       <Menu.Item as={Link} to="/about">
-        about us
+        <Header as="h4">about us</Header>
       </Menu.Item>
       <Menu.Item positiona="right" as={Link} to="/cart" name="cart">
-        <Icon name="shopping bag" />
+        <Header as="h6">
+          <Icon name="shopping bag" />
+        </Header>
       </Menu.Item>
     </Container>
   </Menu>
@@ -136,7 +138,7 @@ export default class Homepage extends Component {
         </Visibility>
 
         <Segment className="no-borders">
-          <Container text>
+          <Container>
             <Grid
               doubling
               container
@@ -150,30 +152,27 @@ export default class Homepage extends Component {
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row columns={3}>
-                <Grid.Column
-                  textAlign="center"
-                  as={Link}
-                  to="/shop/arrangements"
-                >
+                <Grid.Column textAlign="center">
                   <SMImage
                     src="images/products/peony-vase_300.png"
                     size="medium"
                   />
-                  <p>ARRANGEMENTS</p>
+                  <Header as="h4">arrangements</Header>
                 </Grid.Column>
-                <Grid.Column textAlign="center" as={Link} to="/shop/wreaths">
+                <Grid.Column textAlign="center">
                   <SMImage
                     src="images/products/peony-flower-wreath_300.png"
                     size="medium"
                   />
-                  <p>WREATHS</p>
+                  <Header as="h4">wreaths</Header>
                 </Grid.Column>
-                <Grid.Column textAlign="center" as={Link} to="/shop/bouquets">
+                <Grid.Column textAlign="center">
+                  {/* as={Link} to="/shop/bouquets" >*/}
                   <SMImage
                     src="images/products/white-peony-bouquet.png"
                     size="medium"
                   />
-                  <p>BOUQUETS</p>
+                  <Header as="h4">bouquets</Header>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
@@ -181,43 +180,6 @@ export default class Homepage extends Component {
         </Segment>
         <Divider />
         <Segment className="no-borders" style={{ paddingTop: '1.8em' }}>
-          <Container text>
-            <Grid relaxed="very">
-              <Grid.Row>
-                <Grid.Column textAlign="center">
-                  <Header as="h1">Quality and Styles that Last</Header>
-                </Grid.Column>
-              </Grid.Row>
-              <Grid.Row>
-                <Grid.Column textAlign="center">
-                  <p>
-                    We always use the highest quality faux florals in our
-                    products <br /> Our "Real Touch" faux flowers look and feel
-                    just like natural flowers
-                    <br />
-                    <br />
-                    Shop our timeless products to brighten your home for years
-                    to come!
-                  </p>
-
-                  <Button
-                    primary
-                    size="small"
-                    as={Link}
-                    to="/shop"
-                    style={{
-                      fontSize: '1em',
-                    }}
-                  >
-                    shop
-                  </Button>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </Container>
-        </Segment>
-        <Divider />
-        <Segment className="no-borders">
           <Container text>
             <Grid relaxed="very">
               <Grid.Row>
@@ -237,7 +199,7 @@ export default class Homepage extends Component {
                   <List>
                     <List.Item>
                       <List.Content>
-                        <strong>CUSTOM GIFTS</strong>
+                        <List.Header>Personalized Gifts</List.Header>
                         <List.Description>
                           With your recipient's favorite colors and flowers
                         </List.Description>
@@ -245,7 +207,7 @@ export default class Homepage extends Component {
                     </List.Item>{' '}
                     <List.Item>
                       <List.Content>
-                        <strong>HOME DECOR</strong>
+                        <List.Header>Home Decor</List.Header>
                         <List.Description>
                           Perfectly coordinated with your style
                         </List.Description>
@@ -253,15 +215,16 @@ export default class Homepage extends Component {
                     </List.Item>
                     <List.Item>
                       <List.Content>
-                        <strong>WEDDING FLORALS</strong>
+                        <List.Header>Wedding Florals</List.Header>
                         <List.Description>
-                          Arrangements and bouquets to match your color scheme
+                          Everlasting arrangements and bouquets to match your
+                          color scheme
                         </List.Description>
                       </List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Content>
-                        <strong>HOLIDAY DECOR</strong>
+                        <List.Header>Holiday Decor</List.Header>
                         <List.Description>
                           Festive decorations that are elegant yet fun
                         </List.Description>
@@ -283,6 +246,31 @@ export default class Homepage extends Component {
                   >
                     customize
                   </Button>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Container>
+        </Segment>
+        <Divider />
+        <Segment className="no-borders">
+          <Container text>
+            <Grid relaxed="very">
+              <Grid.Row>
+                <Grid.Column textAlign="center">
+                  <Header as="h1">Quality and Styles that Last</Header>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Grid.Column textAlign="center">
+                  <p>
+                    We always use the highest quality faux florals in our
+                    products <br /> Most are "Real Touch" flowers that look and
+                    feel just like natural flowers
+                    <br />
+                    <br />
+                    Our timeless products will brighten your home for years to
+                    come!
+                  </p>
                 </Grid.Column>
               </Grid.Row>
             </Grid>

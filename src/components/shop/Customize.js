@@ -91,7 +91,11 @@ class Customize extends Component {
       }
       return choices.map(choice => {
         if (typeof choice.src === 'object') {
-          choice.src = choice.src[opt.view];
+          if (opt.view) {
+            choice.src = choice[`src${opt.view}`];
+          } else {
+            choice.src = choice['src'];
+          }
         }
         let ret = {
           id: choice.id,
@@ -156,5 +160,8 @@ const mapDispatchToProps = dispatch => {
 };
 export default compose(
   firestoreConnect(['florals', 'greenery']),
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
 )(Customize);

@@ -4,6 +4,7 @@ import {
   Menu,
   Grid,
   Image,
+  Header,
   Responsive,
   Dropdown,
   Segment,
@@ -29,7 +30,7 @@ class HeaderMenu extends Component {
     return (
       <Segment.Group className="no-borders" style={{ margin: '0px' }}>
         <Message style={{ padding: '0.25em' }} attached="top">
-          Free Shipping on Orders Over $100
+          Free Shipping on All Orders
           {/*<Image src={flower} size="mini" />*/}
         </Message>
         <Segment className="no-borders" attached>
@@ -91,7 +92,7 @@ class HeaderMenu extends Component {
             pointing
             secondary
             size="large"
-            widths={5}
+            widths={4}
           >
             <Menu.Item
               as={Link}
@@ -100,9 +101,9 @@ class HeaderMenu extends Component {
               active={activeItem === '/'}
               onClick={this.handleItemClick}
             >
-              home
+              <Header as="h4">home</Header>
             </Menu.Item>
-            <Dropdown item text="shop">
+            {/*             <Dropdown item text="shop">
               <Dropdown.Menu>
                 <Dropdown.Item
                   as={Link}
@@ -128,7 +129,7 @@ class HeaderMenu extends Component {
                   onClick={this.handleItemClick}
                 />
               </Dropdown.Menu>
-            </Dropdown>
+            </Dropdown> */}
 
             <Menu.Item
               as={Link}
@@ -137,19 +138,28 @@ class HeaderMenu extends Component {
               active={activeItem === '/custom'}
               onClick={this.handleItemClick}
             >
-              custom
+              <Header as="h4">custom</Header>
             </Menu.Item>
             <Menu.Item
-              as="a"
+              as={Link}
+              to="/about"
               name="about"
               active={activeItem === '/about'}
               onClick={this.handleItemClick}
             >
-              about us
+              <Header as="h4">about us</Header>
             </Menu.Item>
 
-            <Menu.Item as={Link} to="/cart" name="cart">
-              <Icon name="shopping bag" />
+            <Menu.Item
+              as={Link}
+              to="/cart"
+              name="cart"
+              active={activeItem === '/cart'}
+              onClick={this.handleItemClick}
+            >
+              <Header as="h6">
+                <Icon name="shopping bag" />
+              </Header>
             </Menu.Item>
           </Menu>
         </Segment>

@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
-import GoogleButton from 'react-google-button'; // optional
+import GoogleButton from 'react-google-button';
+import FacebookLoginButton from 'react-social-login-buttons/lib/buttons/FacebookLoginButton';
 import { Segment } from 'semantic-ui-react';
 
 class Login extends Component {
@@ -70,6 +71,18 @@ class Login extends Component {
             theme="dark"
             onClick={() =>
               firebase.login({ provider: 'google', type: 'popup' })
+            }
+          />
+          <br />
+          <FacebookLoginButton
+            style={{
+              width: 240,
+              height: 50,
+              textAlign: 'center',
+              margin: 'auto',
+            }}
+            onClick={() =>
+              firebase.login({ provider: 'facebook', type: 'popup' })
             }
           />
         </Segment>

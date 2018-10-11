@@ -29,7 +29,7 @@ class DDShopWizard extends Component {
     this.state = {
       redirect: false,
       activeKey: 0,
-      style: this.props.style,
+      style: null, //this.props.style,
       steps: [
         {
           title: 'Select Style',
@@ -72,9 +72,22 @@ class DDShopWizard extends Component {
     this.props.onSetDesignOptions(null);
     this.props.setCustomizations(null);
   }
+  unsetStyle() {
+    this.setState({ style: null });
+    this.props.onStyleSelect(null);
+    this.props.onSetDesignOptions(null);
+    this.props.setCustomizations(null);
+    this.toggleCompleted(null);
+  }
   // called when active step changes
   // either from next button or selecting from step menu
   onStepChange(key) {
+    // if key = 0, we are going to step 1 again,
+    // clear any stored customDesign b/c we are starting over
+    if (key === 0) {
+      console.log('reset customizations');
+      this.unsetStyle();
+    }
     // change active key
     this.setState({ activeKey: key });
     // set the active step
@@ -151,11 +164,12 @@ class DDShopWizard extends Component {
     // set available options
     this.props.onSetDesignOptions(style.options);
     // set base for customizations
+    console.log('style', style);
     this.props.setCustomizations({
       id: style.id,
-      name: '',
-      price: null,
-      base: style.base,
+      name: style.header,
+      price: style.base.price,
+      base: { id: style.base.id },
       imageUri: null,
       addedOptions: [],
     });
@@ -167,9 +181,9 @@ class DDShopWizard extends Component {
   addDesignToCart() {
     const cartItem = {
       customDesign: this.props.customDesign,
-      title: this.props.customDesign.name,
+      title: 'Custom ' + this.props.customDesign.name,
       price: this.props.customDesign.price,
-      imageUri: this.props.customDesign.imageUri,
+      imageUri: null, //this.props.customDesign.imageUri,
     };
     console.log('addToCart', cartItem);
     // store image of design in store
@@ -255,4 +269,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DDShopWizard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DDShopWizard);

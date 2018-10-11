@@ -16,6 +16,8 @@ import BackButton from '../common/BackButton';
 import NextButton from '../common/NextButton';
 import StepControlButtons from '../common/StepControlButtons';
 
+// CREATE STRIPE CUSTOMERS AND JUST STORE THIS???
+// USE ORDERS API
 class CartWizard extends Component {
   constructor(props) {
     super(props);
@@ -43,6 +45,7 @@ class CartWizard extends Component {
       selectedAddressValue: null,
       cartItems: this.props.cartItems ? this.props.cartItems : null,
     };
+
     this.state.steps = [
       {
         title: 'Shopping Bag',
@@ -57,7 +60,7 @@ class CartWizard extends Component {
             getCartItems={this.getCartItems}
             total={this.props.total}
             onChangeQuantity={this.props.onChangeQuantity}
-            onCheckoutClicked={() => {}}
+            onCheckoutClicked={this.nextStep}
             onEmptyCart={this.props.onEmptyCart}
           />
         ),
@@ -67,7 +70,7 @@ class CartWizard extends Component {
         icon: 'user circle outline',
         active: false,
         completed: false,
-        disabled: false, // for now with testing with empty cart
+        disabled: false,
         key: 1,
         description: 'Login to your account',
         content: (
@@ -122,7 +125,7 @@ class CartWizard extends Component {
         icon: 'info',
         active: false,
         completed: false,
-        disabled: false, // Testing
+        disabled: true,
         key: 4,
         description: 'Review and place your order',
         content: (
@@ -133,6 +136,7 @@ class CartWizard extends Component {
               getSelectedAddress={this.getSelectedAddress}
               getCartItems={this.getCartItems}
               total={this.props.total}
+              //  onChangeQuantity={this.props.onChangeQuantity}
               setDimmer={this.setDimmer}
             />
           </div>
@@ -332,8 +336,12 @@ const mapDispatchToProps = dispatch => {
       dispatch(emptyCart());
     },
     onChangeQuantity: ({ index, quantity }) => {
+      console.log('onChangeQuantity, cart wizard');
       dispatch(updateQuantity({ index, quantity }));
     },
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(CartWizard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CartWizard);

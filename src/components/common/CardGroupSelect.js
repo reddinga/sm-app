@@ -11,7 +11,6 @@ class CardGroupSelect extends Component {
     this.handleOptionClick = this.handleOptionClick.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    console.log('cardgroup selected', nextProps.selected);
     // if (this.nextProps.resetState) {
     this.setState({ selected: nextProps.selected });
     //}
@@ -19,14 +18,19 @@ class CardGroupSelect extends Component {
   offColor = 'grey';
   onColor = 'pink';
   handleOptionClick(event, data) {
+    console.log('handleOptionClick data: ', data);
     if (this.state.selected === null || this.state.selected !== data.id) {
       this.setState({ selected: data.id });
 
-      this.props.handleChoiceChange({ id: data.id, src: data.src });
+      this.props.handleChoiceChange({
+        id: data.id,
+        src: data.src,
+        price: data.price,
+      });
     } else if (this.state.selected === data.id) {
       // we are unselecting current option
       this.setState({ selected: null });
-      this.props.handleChoiceChange({ id: null, src: null });
+      this.props.handleChoiceChange({ id: null, src: null, price: null });
     }
   }
   getCards(cardOptions) {
@@ -41,6 +45,7 @@ class CardGroupSelect extends Component {
             key={opts.id}
             id={opts.id}
             src={opts.src}
+            price={opts.price}
             color={
               this.state.selected === opts.id ? this.onColor : this.offColor
             }
@@ -52,14 +57,11 @@ class CardGroupSelect extends Component {
                 {opts.header && (
                   <Card.Header textAlign="center">{opts.header}</Card.Header>
                 )}
-                {opts.footer && (
-                  <Header as="h3" style={{ marginTop: '0.25em' }}>
-                    {opts.footer}
-                  </Header>
-                )}
+                {opts.footer}
               </Card.Content>
             )}
           </Card>
+          <div style={{ textAlign: 'center' }}>{opts.bottomLabel}</div>
         </Grid.Column>
       );
     });

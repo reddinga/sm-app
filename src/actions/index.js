@@ -31,3 +31,7 @@ export function emptyCart() {
 export function checkout(items) {
   return { type: types.CHECKOUT_REQUEST, items };
 }
+
+export function setLastUri(customizations) {
+  return { type: types.SET_LAST_URI, customizations };
+}

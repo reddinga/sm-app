@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Header, Button, Grid } from 'semantic-ui-react';
 import Product from './Product';
+import Checkout from './Pay';
 
 class Cart extends Component {
   constructor(props) {
@@ -35,7 +36,10 @@ class Cart extends Component {
         <Grid.Row>
           <Grid.Column>
             {total > 0 && (
-              <p style={{ fontSize: '1.5em' }}>Total: &#36;{total}</p>
+              <p style={{ fontSize: '1.5em' }}>
+                Total: &#36;
+                {total}
+              </p>
             )}
           </Grid.Column>
         </Grid.Row>
@@ -43,6 +47,8 @@ class Cart extends Component {
     );
   }
   render() {
+    console.log('cart props', this.props);
+    console.log('cart state', this.state);
     let { onCheckoutClicked } = this.props;
     let cartItems = this.props.getCartItems();
     let hasCartItems = false;
@@ -57,14 +63,19 @@ class Cart extends Component {
           {hasCartItems ? (
             <div>
               {this.getCartSection(cartItems)}
-              <Button
-                primary
-                style={{ marginTop: '1em' }}
-                onClick={onCheckoutClicked}
-                disabled={hasCartItems ? false : true}
+              <Checkout
+                name={'The Road to learn React'}
+                description={'Only the Book'}
+                amount={1}
               >
-                Checkout
-              </Button>
+                <Button
+                  primary
+                  style={{ marginTop: '1em' }}
+                  disabled={hasCartItems ? false : true}
+                >
+                  Checkout
+                </Button>
+              </Checkout>
               <Button
                 secondary
                 style={{ marginTop: '1em' }}

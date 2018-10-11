@@ -209,7 +209,6 @@ class ShopWizard extends Component {
   goToCart() {
     this.setState({ redirect: true });
   }
-
   render() {
     return (
       <div>
@@ -289,4 +288,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShopWizard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ShopWizard);

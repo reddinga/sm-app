@@ -129,9 +129,11 @@ class Payments extends Component {
 
 const mapStateToProps = (state, props) => {
   console.log('ms state', state);
-  let data = state.firebase.data.stripe_customers
-    ? state.firebase.data.stripe_customers[state.firebase.auth.uid].sources
-    : {};
+  let data =
+    state.firebase.data.stripe_customers &&
+    state.firebase.data.stripe_customers[state.firebase.auth.uid]
+      ? state.firebase.data.stripe_customers[state.firebase.auth.uid].sources
+      : {};
   console.log('data', data);
   return {
     ...state,
@@ -148,4 +150,9 @@ const mapStateToProps = (state, props) => {
 );
  */
 Payments = firebaseConnect(['stripe_customers'])(Payments);
-export default injectStripe(connect(mapStateToProps, actions)(Payments));
+export default injectStripe(
+  connect(
+    mapStateToProps,
+    actions,
+  )(Payments),
+);

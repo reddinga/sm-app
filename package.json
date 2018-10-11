@@ -29,6 +29,7 @@
     "react-scripts": "1.0.17",
     "react-scroll-to-component": "^1.0.2",
     "react-share": "^2.0.0",
+    "react-social-login-buttons": "^2.0.1",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^1.6.0",
     "redux": "^3.7.2",

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { injectStripe, CardElement } from 'react-stripe-elements';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { updateQuantity } from '../../actions';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import {
   Button,
@@ -10,32 +10,46 @@ import {
   Accordion,
   Icon,
   List,
+  Grid,
 } from 'semantic-ui-react';
 import * as actions from '../../actions';
 import { toastr } from 'react-redux-toastr';
+import Product from './Product';
+import getTotalPrice from './getTotalPrice';
+import Checkout from './Pay';
 class Confirm extends Component {
   constructor(props) {
     super(props);
     this.submitNewCharge = this.submitNewCharge.bind(this);
     this.componentWillMount = this.componentWillMount.bind(this);
     this.listen = this.listen.bind(this);
+    this.updateQuantity = this.updateQuantity.bind(this);
+    this.getCartItemDiv = this.getCartItemDiv.bind(this);
     this.state = {
       activeIndex: -1,
     };
+  }
+  updateQuantity(idx, qty) {
+    console.log('qty', qty);
+    this.props.onChangeQuantity({ index: idx, quantity: qty });
   }
   submitNewCharge = ev => {
     ev.preventDefault();
     console.log('newcharge', this.props);
     let source = this.props.getSelectedSource();
     console.log('source', source);
+    let totalPrice = this.getTotal();
+    console.log('totalPrice', totalPrice);
     this.props.setDimmer(true);
     this.props.firebase
       .push(`/stripe_customers/${this.props.auth.uid}/charges`, {
         source: source, //this.newCharge.source,
-        amount: 1000, //parseInt(this.newCharge.amount),
+        amount: totalPrice, //parseInt(this.newCharge.amount),
       })
       .then(res => {
         console.log('res', res);
+        this.props.setDimmer(false);
+        toastr.success('Success!', 'Successful purchase!');
       })
       .catch(err => {
         console.log('err', err);
@@ -72,6 +86,47 @@ class Confirm extends Component {
   componentWillMount() {
     this.listen();
   }
+  getCartItemDiv() {
+    let cartItems = this.getCartItems();
+    let total = 0.0;
+    const productRows = cartItems.map((product, index) => {
+      total = total + product.cartItem.price * product.quantity;
+      return (
+        <Product
+          index={index}
+          imageUri={product.cartItem.imageUri}
+          onUpdateQty={this.updateQuantity}
+          title={product.cartItem.title}
+          price={product.cartItem.price}
+          quantity={product.quantity}
+          key={index}
+        />
+      );
+    });
+    return (
+      <Grid>
+        {productRows}
+        <Grid.Row>
+          <Grid.Column>
+            {total > 0 && (
+              <p style={{ fontSize: '1.5em' }}>
+                Total: &#36;
+                {total}
+              </p>
+            )}
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    );
+  }
+  getTotal() {
+    let total = getTotalPrice(this.getCartItems());
+    return total;
+  }
+  getCartItems() {
+    let cartItems = this.props.getCartItems();
+    return cartItems;
+  }
   handleAccordionClick = (e, titleProps) => {
     const { index } = titleProps;
     const { activeIndex } = this.state;
@@ -82,17 +137,17 @@ class Confirm extends Component {
     console.log('confirm props', this.props);
     console.log('confirm state', this.state);
     const { activeIndex } = this.state;
-    const source = this.props.getSelectedSource();
     const card = this.props.getSelectedCard();
     const address = this.props.getSelectedAddress();
-    const cartItems = this.props.getCartItems();
-    const total = this.props.total;
     return (
       <Segment textAlign="center" basic>
         <h2>Confirm Order</h2>
 
         <Segment textAlign="left" attached="top">
-          <Header>Order Total: &#36;{total}</Header>
+          <Header>
+            Order Total: &#36;
+            {this.getTotal()}
+          </Header>
           <Accordion>
             <Accordion.Title
               active={activeIndex === 0}
@@ -103,8 +158,7 @@ class Confirm extends Component {
               Your Items
             </Accordion.Title>
             <Accordion.Content active={activeIndex === 0}>
-              List Items Here
-              <p>{cartItems}</p>
+              <div>{this.getCartItemDiv()} </div>
             </Accordion.Content>
           </Accordion>
         </Segment>
@@ -137,6 +191,11 @@ class Confirm extends Component {
         >
           Pay
         </Button>
+        <Checkout
+            name={'The Road to learn React'}
+            description={'Only the Book'}
+            amount={1}
+          />
       </Segment>
     );
   }
@@ -150,9 +209,16 @@ const mapStateToProps = (state, props) => {
     push: state.firebase.push,
   };
 };
-
+const mapDispatchToProps = dispatch => {
+  return {
+    onChangeQuantity: ({ index, quantity }) => {
+      console.log('onChangeQuantity, confirm');
+      dispatch(updateQuantity({ index, quantity }));
+    },
+  };
+};
 Confirm = firebaseConnect(['stripe_customers'])(Confirm);
-export default connect(({ firebase }) => ({
-  profile: firebase.profile,
-  auth: firebase.auth,
-}))(Confirm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Confirm);

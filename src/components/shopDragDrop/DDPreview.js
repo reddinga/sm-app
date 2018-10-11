@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
-import { Segment } from 'semantic-ui-react';
+import { Segment, List, Button, Popup, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Stage, Layer } from 'react-konva';
+import { setCustomizations, setLastUri } from '../../actions';
 import DDPreviewCanvas from './DDPreviewCanvas';
 
 class DDPreview extends Component {
   getPreview() {
     const customDesign = this.props.customDesign;
-    if (customDesign) {
-      return <DDPreviewCanvas customDesign={customDesign} />;
+    if (customDesign && customDesign.base && customDesign.base.src) {
+      return (
+        <DDPreviewCanvas
+          customDesign={customDesign}
+          handleUpdateCustomDesign={this.props.onSetCustomDesign}
+          handleSetLast={this.props.onSetLast}
+        />
+      );
     } else {
       return (
         <Segment raised compact>
@@ -21,10 +28,26 @@ class DDPreview extends Component {
       );
     }
   }
+  getTips() {
+    return (
+      <List>
+        <List.Item>click + drag to move</List.Item>
+        <List.Item>click once to flip</List.Item>
+        <List.Item>double-click to rotate</List.Item>
+        <List.Item>drag to trash to delete</List.Item>
+      </List>
+    );
+  }
   render() {
     return (
       <Segment className="no-borders" compact>
         {this.getPreview()}
+        <Popup
+          header="Tips"
+          trigger={<Icon color="grey" name="help circle" />}
+          content={this.getTips()}
+          on={['hover', 'click']}
+        />
       </Segment>
     );
   }
@@ -35,7 +58,16 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    onSetCustomDesign: opts => {
+      dispatch(setCustomizations(opts));
+    },
+    onSetLast: opts => {
+      dispatch(setLastUri(opts));
+    },
+  };
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(DDPreview);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DDPreview);

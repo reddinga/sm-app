@@ -1,19 +1,18 @@
-var admin = require('firebase-admin');
-var serviceAccount = require('../../silver-maple-b0405-firebase-adminsdk-za2wg-6d2e4ec226.json');
-var fs = require('fs');
-var parse = require('csv-parse');
+let admin = require('firebase-admin');
+let serviceAccount = require('../../silver-maple-b0405-firebase-adminsdk-za2wg-6d2e4ec226.json');
+let fs = require('fs');
+let parse = require('csv-parse');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://silver-maple-b0405.firebaseio.com',
 });
 
-var db = admin.firestore();
-var fileName = process.argv[2];
-
+let db = admin.firestore();
+let collectionName = process.argv[2]; // ie products
+let fileName = process.argv[3];
+console.log('uploading: ', collectionName);
 let labels = [];
-const collectionName = 'products';
-
 fs.createReadStream(__dirname + '/' + fileName).pipe(
   parse({ delimiter: ',' }, function(err, data) {
     if (err) {
@@ -42,8 +41,7 @@ async function updateCollection(dataArray) {
 
 function startUploading(doc) {
   return new Promise(resolve => {
-    db
-      .collection(collectionName)
+    db.collection(collectionName)
       .add(doc)
       .then(ref => {
         console.log('Added document with ID: ', ref.id);

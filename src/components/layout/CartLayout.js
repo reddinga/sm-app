@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CartWizard from '../shoppingCart/CartWizard';
+import Cart from '../checkoutCart/Cart';
 
 class CartLayout extends Component {
   constructor(props) {
@@ -7,7 +7,7 @@ class CartLayout extends Component {
     this.state = {};
   }
   render() {
-    return <CartWizard />;
+    return <Cart />;
   }
 }
 

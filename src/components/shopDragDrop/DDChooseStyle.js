@@ -30,8 +30,15 @@ class DDChooseStyle extends Component {
       return styles.map((style, index) => {
         return {
           id: style.id,
+          price: style.base.price,
           header: style.header,
           content: <SMImage src={style.src} />,
+          bottomLabel:
+            'Starting at ' +
+            new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            }).format(style.base.price),
         };
       });
     } else {
@@ -56,6 +63,7 @@ const mapStateToProps = (state, props) => {
   return { styles: state.firestore.ordered.styles };
 };
 
-export default compose(firestoreConnect(['styles']), connect(mapStateToProps))(
-  DDChooseStyle,
-);
+export default compose(
+  firestoreConnect(['styles']),
+  connect(mapStateToProps),
+)(DDChooseStyle);

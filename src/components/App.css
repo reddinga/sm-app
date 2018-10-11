@@ -59,6 +59,9 @@
 .full-height {
   height: 100vh;
 }
+.transparent {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
 /* .redux-toastr .toastr.rrt-success {
   background-color: @primaryColor !important;
 } */
