@@ -1,0 +1,6 @@
+color,name,price,src,type
+white,white peony,8,images/products/white-peony-bouquet.png,peony
+red,red rose,7,images/florals/red-rose-top.png,rose
+pink,pink peony,8,images/florals/pink-peony-top.png,peony
+peach,peach rose,7,images/florals/peach-rose-top.png,rose
+pink,small pink peony,7,images/florals/small-pink-peony-top.png,peony
