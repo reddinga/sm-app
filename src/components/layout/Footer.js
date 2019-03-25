@@ -19,7 +19,7 @@ export default props => {
             </Grid.Column>
           </Grid.Row>
         </Grid>*/}
-        <small>&copy; Copyright 2018, Silver Maple Studio</small>
+        <small>&copy; Copyright 2019, Silver Maple Studio</small>
       </Container>
     </Segment>
   );

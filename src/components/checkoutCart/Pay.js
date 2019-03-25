@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import logo from '../../assets/images/logo/logo_leaf_only.png';
 import { emptyCart } from '../../actions';
 
-const STRIPE_PUBLISHABLE = 'pk_test_a3MHx3gWetXNtlpIAh1BABJm';
+const STRIPE_PUBLISHABLE = 'pk_live_UBcfb7A102Ubq7iVNGUIqsOS';
 const FIREBASE_FUNCTION =
   'https://us-central1-silver-maple-b0405.cloudfunctions.net/charge';
 const CURRENCY = 'USD';

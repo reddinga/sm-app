@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'babel-polyfill';
 import registerServiceWorker from './registerServiceWorker';
 // fonts
 import 'typeface-montserrat';

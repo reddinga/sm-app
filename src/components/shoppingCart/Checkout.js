@@ -33,7 +33,7 @@ class TakeMoney extends React.Component {
       // ...
       <StripeCheckout
         token={this.onToken}
-        stripeKey="pk_test_a3MHx3gWetXNtlpIAh1BABJm"
+        stripeKey="pk_live_UBcfb7A102Ubq7iVNGUIqsOS"
         amount={this.props.totalPayment}
       />
     );

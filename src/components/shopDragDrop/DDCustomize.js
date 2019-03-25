@@ -79,7 +79,10 @@ class DDCustomize extends Component {
   }
   getDropdownOptions(options) {
     return options.map((option, index) => {
-      return { text: option, value: index };
+      return {
+        text: option,
+        value: index,
+      };
     });
   }
   getBases() {
@@ -108,6 +111,7 @@ class DDCustomize extends Component {
             currency: 'USD',
           }).format(choice.price),
           content: <SMImage key={choice.id} {...choice} />,
+          footer: choice.size ? choice.size : null,
         };
         return ret;
       });
@@ -144,6 +148,7 @@ class DDCustomize extends Component {
             style: 'currency',
             currency: 'USD',
           }).format(choice.price),
+          footer: choice.label ? choice.label : null,
           content: <SMImage key={choice.id} {...choice} />,
         };
         return ret;
@@ -191,6 +196,7 @@ class DDCustomize extends Component {
                 placeholder="Option #1"
                 selection
                 fluid
+                className="custom-options-dropdown"
                 onChange={this.handleDropdownChange}
                 defaultValue={0}
                 options={this.getDropdownOptions(this.props.designOptions)} // From store
@@ -209,7 +215,7 @@ class DDCustomize extends Component {
             {new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
-            }).format(this.props.customDesign.price)}{' '}
+            }).format(this.props.customDesign.price)}
           </h3>
           <AddToCart onClick={this.props.addDesignToCart} />
         </Container>

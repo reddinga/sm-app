@@ -5,13 +5,16 @@ import { compose } from 'redux';
 import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import ProductImage from './ProductImage';
 import SMImage from '../common/SMImage';
+import AddToCart from '../common/AddToCart';
 
 class ProductPage extends Component {
   constructor(props) {
     super(props);
     this.state = { productId: props.match.params.productId };
   }
-
+  addToCart() {
+    console.log('addToCart');
+  }
   render() {
     const { match, myProduct } = this.props;
     let productId = this.state.productId;
@@ -33,6 +36,11 @@ class ProductPage extends Component {
             <Grid.Row centered>
               <Grid.Column textAlign="center">
                 <SMImage src={myProduct.src} />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row centered>
+              <Grid.Column textAlign="center">
+                <AddToCart onClick={this.addToCart} />
               </Grid.Column>
             </Grid.Row>
           </Grid>

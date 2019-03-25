@@ -44,7 +44,7 @@ class DDPreview extends Component {
         {this.getPreview()}
         <Popup
           header="Tips"
-          trigger={<Icon color="grey" name="help circle" />}
+          trigger={<Icon style={{ color: '#8090a0' }} name="help circle" />}
           content={this.getTips()}
           on={['hover', 'click']}
         />

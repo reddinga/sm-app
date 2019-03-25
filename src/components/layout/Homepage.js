@@ -16,8 +16,8 @@ import {
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import SMImage from '../common/SMImage';
-import background from '../../assets/images/background/bring_spring_inside.png';
-import backgroundMobile from '../../assets/images/background/bring_spring_inside_mobile.png';
+import background from '../../assets/images/background/florist_large.png';
+import backgroundMobile from '../../assets/images/background/florist_large_cropped_mobile.png';
 
 const dividerSrc = '../../assets/images/decorative/divider_simple.png';
 
@@ -27,7 +27,7 @@ const FixedMenu = () => (
       <Menu.Item as={Link} to="/" active>
         <Header as="h4">home</Header>
       </Menu.Item>
-      {/*       <Dropdown item text="shop">
+      <Dropdown item text="shop">
         <Dropdown.Menu>
           <Dropdown.Item
             as={Link}
@@ -39,9 +39,9 @@ const FixedMenu = () => (
 
           <Dropdown.Item as={Link} to="/shop/bouquets" text="bouquets" />
         </Dropdown.Menu>
-      </Dropdown> */}
+      </Dropdown>
       <Menu.Item as={Link} to="/custom">
-        <Header as="h4">custom</Header>
+        <Header as="h4">create</Header>
       </Menu.Item>
       <Menu.Item as={Link} to="/about">
         <Header as="h4">about us</Header>
@@ -95,7 +95,7 @@ export default class Homepage extends Component {
           style={{
             fontSize: '1.5em',
             marginBottom: '0',
-            marginTop: mobile ? '11em' : '11em',
+            marginTop: mobile ? '8em' : '8em',
           }}
         >
           start customizing
@@ -154,7 +154,7 @@ export default class Homepage extends Component {
               <Grid.Row columns={3}>
                 <Grid.Column textAlign="center">
                   <SMImage
-                    src="images/products/peony-vase_300.png"
+                    src="images/products/rose-arrangement.png"
                     size="medium"
                   />
                   <Header as="h4">arrangements</Header>
@@ -166,8 +166,7 @@ export default class Homepage extends Component {
                   />
                   <Header as="h4">wreaths</Header>
                 </Grid.Column>
-                <Grid.Column textAlign="center">
-                  {/* as={Link} to="/shop/bouquets" >*/}
+                <Grid.Column textAlign="center" as={Link} to="/shop/bouquets">
                   <SMImage
                     src="images/products/white-peony-bouquet.png"
                     size="medium"

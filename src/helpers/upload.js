@@ -31,7 +31,7 @@ async function updateCollection(dataArray) {
     let doc = {};
     labels.forEach((label, index) => {
       if (row[index]) {
-        doc[label] = row[index];
+        doc[label] = label === 'price' ? parseInt(row[index], 10) : row[index];
       }
     });
     console.log('doc', doc);

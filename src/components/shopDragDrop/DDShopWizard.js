@@ -168,7 +168,7 @@ class DDShopWizard extends Component {
     this.props.setCustomizations({
       id: style.id,
       name: style.header,
-      price: style.base.price,
+      price: 0,
       base: { id: style.base.id },
       imageUri: null,
       addedOptions: [],
@@ -203,12 +203,7 @@ class DDShopWizard extends Component {
           <Redirect push to="/cart" />
         ) : (
           <div>
-            <Segment
-              style={{ paddingBottom: '0px' }}
-              className="no-borders"
-              vertical
-              attached="top"
-            >
+            <Segment style={{ paddingBottom: '0px' }} vertical attached="top">
               <Grid
                 centered
                 columns={2}
@@ -220,7 +215,6 @@ class DDShopWizard extends Component {
               </Grid>
             </Segment>
             <Segment
-              className="no-borders"
               size="mini"
               style={{ padding: '0em 0em' }}
               vertical

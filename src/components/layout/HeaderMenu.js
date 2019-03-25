@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Icon,
   Menu,
@@ -26,6 +27,11 @@ class HeaderMenu extends Component {
   handleItemClick = (e, { to }) => this.setState({ activeItem: to });
 
   render() {
+    console.log('HeaderMenu this.props.cartItems', this.props.cartItems);
+    let numCartItems = 0;
+    this.props.cartItems.forEach(cI => {
+      numCartItems = numCartItems + cI.quantity;
+    });
     const { activeItem } = this.state;
     return (
       <Segment.Group className="no-borders" style={{ margin: '0px' }}>
@@ -138,7 +144,7 @@ class HeaderMenu extends Component {
               active={activeItem === '/custom'}
               onClick={this.handleItemClick}
             >
-              <Header as="h4">custom</Header>
+              <Header as="h4">create</Header>
             </Menu.Item>
             <Menu.Item
               as={Link}
@@ -158,7 +164,8 @@ class HeaderMenu extends Component {
               onClick={this.handleItemClick}
             >
               <Header as="h6">
-                <Icon name="shopping bag" />
+                <Icon style={{ marginRight: '0.25rem' }} name="shopping bag" />
+                {numCartItems}
               </Header>
             </Menu.Item>
           </Menu>
@@ -167,5 +174,12 @@ class HeaderMenu extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return { ...state };
+};
+HeaderMenu = connect(
+  mapStateToProps,
+  null,
+)(HeaderMenu);
 
 export default withRouter(props => <HeaderMenu {...props} />);

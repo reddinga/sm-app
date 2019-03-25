@@ -1,6 +1,32 @@
 color,name,price,src,type
-white,white peony,8,images/products/white-peony-bouquet.png,peony
-red,red rose,7,images/florals/red-rose-top.png,rose
-pink,pink peony,8,images/florals/pink-peony-top.png,peony
-peach,peach rose,7,images/florals/peach-rose-top.png,rose
-pink,small pink peony,7,images/florals/small-pink-peony-top.png,peony
+blue,blue rose bud,8,images/florals/blue-rose-bud.png,rose-bud
+dusty blue,dusty blue rose bud,8,images/florals/dusty-blue-rose-bud.png,rose-bud
+dusty blue,dusty blue rose,8,images/florals/dusty-blue-rose.png,rose
+blush,small blush peony,8,images/florals/small-blush-peony.png,peony
+burgundy,small burgundy peony,8,images/florals/small-burgundy-peony.png,peony
+ivory,ivory rose bud top,8,images/florals/ivory-rose-bud-top.png,rose-bud
+ivory,ivory freesia,8,images/florals/ivory-freesia.png,freesia
+ivory,ivory rose top,8,images/florals/ivory-rose-top.png,rose
+ivory,ivory cabbage rose,8,images/florals/ivory-cabbage-rose.png,cabbage rose
+ivory/pink,ivory rose pink edge,8,images/florals/pink-edge-ivory-rose.png,rose
+mauve,mauve rose,8,images/florals/mauve-rose.png,rose
+dark mauve,dark mauve rose,8,images/florals/dark-mauve-rose.png,rose
+mauve,small mauve peony,8,images/florals/small-mauve-peony.png,peony
+mauve,mauve garden rose,8,images/florals/mauve-garden-rose.png,rose
+orange,orange tulip,8,images/florals/orange-tulip.png,tulip
+peach,peach rose,8,images/florals/peach-rose.png,rose
+pink,pink anemone top,8,images/florals/pink-anemone-top.png,anemone
+pink,pink daisy top,8,images/florals/pink-daisy-top.png,daisy
+pink,pink peony top,8,images/florals/pink-peony-top.png,peony
+pink,pink rose bud top,8,images/florals/pink-rose-bud-top.png,rose-bud
+pink,pink rose top,8,images/florals/pink-rose-top.png,rose
+plum,small plum peony,8,images/florals/small-plum-peony.png,peony
+red,red rose top,8,images/florals/red-rose-top.png,rose
+red,red rose bud top,8,images/florals/red-rose-bud-top.png,rose-bud
+white,white anemone,8,images/florals/white-anemone.png,anemone
+white,white daisy top,8,images/florals/white-daisy-top.png,daisy
+white,white tulip,8,images/florals/white-tulip.png,tulip
+white,small white peony,8,images/florals/small-white-peony.png,peony
+white,white rose top,8,images/florals/white-rose-top.png,rose
+yellow,yellow anemone top,8,images/florals/yellow-anemone-top.png,anemone
+yellow,yellow rose top,8,images/florals/yellow-rose-top.png,rose

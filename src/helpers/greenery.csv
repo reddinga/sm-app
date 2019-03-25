@@ -1,0 +1,8 @@
+color,name,price,src,type
+green,fern,3,images/greenery/fern.png,fern
+green,ivy,3,images/greenery/ivy-top.png,ivy
+green,eucalyptus,4,images/greenery/eucalyptus-top.png,eucalyptus
+green,small leaves,3,images/greenery/cute-leaves-top.png,leaves
+green,small white flower bush,4,images/greenery/small-white-flower-bush.png,small flower
+green,lambs ear,5,images/greenery/lambs-ear.png,lambs ear
+green,bayleaf,5,images/greenery/bay-leaf.png,bayleaf

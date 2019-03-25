@@ -15,6 +15,7 @@ import {
   Dropdown,
 } from 'semantic-ui-react';
 
+import SMImage from '../common/SMImage';
 class AboutLayout extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +24,7 @@ class AboutLayout extends Component {
   render() {
     return (
       <Segment className="no-borders">
-        <Container>
+        <Container text={true}>
           <Grid
             doubling
             container
@@ -34,20 +35,43 @@ class AboutLayout extends Component {
             <Grid.Row>
               <Grid.Column textAlign="center">
                 <Header as="h1">we love beautiful flowers</Header>
-                <Header as="h1">we hate throwing them out</Header>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
               <Grid.Column textAlign="justify">
                 <p>
-                  When we discovered real touch flowers we fell in LOVE! We had
-                  never seen faux florals that looked so natural before. We
-                  began making our own faux flower arrangements and wanted to
-                  share them with the world. All of our florals are
-                  custom-designed and handmade. We love offering custom designs.
-                  This allows our customers to personalize their items for their
-                  homes or the homes of their gift-recipients
+                  Flowers instanly make your space feel happier and more
+                  inviting. Fresh flowers are lovely, but they require a lot of
+                  upkeep and are expensive to keep replacing. Our high-quality
+                  real touch flowers look better than fresh, without the work.
+                  <br />
+                  <br /> All Silver Maple products are custom designed by you.
+                  We offer custom designs because they allow customers to
+                  experience the joy of creating something unique for themselves
+                  or their friends and family. We hope you enjoy this experience
+                  as much as we do!
                 </p>
+              </Grid.Column>
+            </Grid.Row>
+
+            <Divider />
+            <Grid.Row>
+              <Grid.Column textAlign="center">
+                <Header as="h1">about our name</Header>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column textAlign="center">
+                <p>
+                  This is Maple the Goldendoodle. She is VP of Doodle Relations
+                  and consistenly wins employee of the month.
+                </p>
+              </Grid.Column>
+            </Grid.Row>
+
+            <Grid.Row>
+              <Grid.Column textAlign="center">
+                <SMImage src="images/maple.png" size="medium" />
               </Grid.Column>
             </Grid.Row>
           </Grid>

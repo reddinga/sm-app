@@ -24,10 +24,12 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Homepage} />
 
-              {/* <Route path="/shop" component={StoreLayout} /> */}
+              <Route path="/shop" component={StoreLayout} />
 
               <Route path="/product" component={ProductLayout} />
+
               <Route path="/confirmation" component={ConfirmationLayout} />
+
               <Route exact path="/custom" component={ShopLayout} />
 
               <Route exact path="/cart" component={CartLayout} />
